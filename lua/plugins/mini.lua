@@ -4,7 +4,7 @@ vim.pack.add({
 
 require('mini.comment').setup({ options = { ignore_blank_line = true } })
 require('mini.diff').setup()
-require('mini.files').setup({ options = { use_as_default_explorer = false } })
+require('mini.files').setup({ options = { use_as_default_explorer = true } })
 require('mini.git').setup()
 require('mini.icons').setup()
 MiniIcons.mock_nvim_web_devicons()

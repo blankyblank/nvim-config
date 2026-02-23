@@ -68,6 +68,7 @@ vim.keymap.set("n", '<leader>sw', ":SudaWrite<CR>", { desc = 'suda write' })
 vim.keymap.set("n", '<leader>pu', "<cmd>lua vim.pack.update()<CR>", { desc = 'update plugins' })
 vim.keymap.set("n", '<leader>pp', "<cmd>lua vim.pack.update(nil, { offline = true })<CR>",
   { desc = 'show installed plugins' })
+
 vim.keymap.set("n", '<leader>pd', function()
   vim.ui.input({ prompt = 'Enter packages to remove: ' }, function(input)
     if input then
@@ -78,7 +79,7 @@ end, { desc = 'delete plugins' })
 
 vim.keymap.set('n', "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", { desc = "Smart Find Files" })
 vim.keymap.set('n', "<leader>fb", "<cmd>lua Snacks.picker.buffers()<CR>", { desc = "Buffers" })
-vim.keymap.set('n', "<leader>ff", "<cmd>lua Snacks.picker.files()<CR>", { desc = "Find Files" })
+vim.keymap.set('n', "<leader>ff", "<cmd>lua Snacks.picker.files({ hidden = true })<CR>", { desc = "Find Files" })
 vim.keymap.set('n', "<leader>fg", "<cmd>lua Snacks.picker.grep_word()<CR>", { desc = "Visual selection or word" })
 vim.keymap.set('n', "<leader>f/", "<cmd>lua Snacks.picker.grep()<CR>", { desc = "Grep" })
 vim.keymap.set('n', "<leader>fp", "<cmd>lua Snacks.picker.projects()<CR>", { desc = "Projects" })
@@ -96,9 +97,9 @@ vim.keymap.set('n', "<leader>u.", "<cmd>lua Snacks.scratch()<CR>", { desc = "Tog
 
 vim.keymap.set('n', "<leader>et", "<cmd>lua Snacks.explorer()<CR>", { desc = "File Explorer" })
 vim.keymap.set('n', "<leader>ee", "<cmd>lua MiniFiles.open()<CR>")
-vim.keymap.set('n', '<leader>ef', '<cmd>Yazi<cr>', { desc = 'Open yazi at the current file' })
-vim.keymap.set('n', '<leader>ed', '<cmd>Yazi cwd<cr>', { desc = "Open the file manager in nvim's working directory" })
-vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
+-- vim.keymap.set('n', '<leader>ef', '<cmd>Yazi<cr>', { desc = 'Open yazi at the current file' })
+-- vim.keymap.set('n', '<leader>ed', '<cmd>Yazi cwd<cr>', { desc = "Open the file manager in nvim's working directory" })
+-- vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
 
 vim.keymap.set('n', "<leader>gb", "<cmd>lua Snacks.picker.git_branches()<CR>", { desc = "Git Branches" })
 vim.keymap.set('n', "<leader>gl", "<cmd>lua Snacks.picker.git_log()<CR>", { desc = "Git Log" })
@@ -130,14 +131,13 @@ vim.keymap.set('n', "gy", "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>", {
 vim.keymap.set('n', "gai", "<cmd>lua Snacks.picker.lsp_incoming_calls()<CR>", { desc = "C[a]lls Incoming" })
 vim.keymap.set('n', "gao", "<cmd>lua Snacks.picker.lsp_outgoing_calls()<CR>", { desc = "C[a]lls Outgoing" })
 
-vim.keymap.set('n', "<leader>dx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "(Trouble) Diagnostics", })
+vim.keymap.set("n", "<leader>dl", "<cmd>NoiceLast<CR>", { desc = "show last error" })
+vim.keymap.set("n", "<leader>df", "<cmd>NoiceSnacks<CR>", { desc = "search through errors" })
 vim.keymap.set('n', "<leader>ds", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "(Trouble) Symbols", })
 vim.keymap.set('n', "<leader>dL", "<cmd>Trouble loclist toggle<cr>", { desc = "(Trouble) Location List", })
 vim.keymap.set('n', "<leader>dQ", "<cmd>Trouble qflist toggle<cr>", { desc = "(Trouble) Quickfix List", })
 vim.keymap.set('n', "<leader>dd", "<cmd>lua Snacks.picker.diagnostics()<CR>", { desc = "Diagnostics" })
 vim.keymap.set('n', "<leader>dD", "<cmd>lua Snacks.picker.diagnostics_buffer()<CR>", { desc = "Buffer Diagnostics" })
-vim.keymap.set('n', "<leader>dX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-  { desc = "(Trouble) Buffer Diagnostics", })
 vim.keymap.set('n', "<leader>dl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
   { desc = "(Trouble) LSP Definitions / references", })
 

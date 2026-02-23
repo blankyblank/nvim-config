@@ -10,7 +10,7 @@ require('snacks').setup({
   debug = { enabled = true },
   explorer = { enabled = true, replace_netrw = false },
   input = { enabled = true, backdrop = true },
-  notifier = { enabled = false },
+  notifier = { enabled = true },
   quickfile = { enabled = true },
   scope = { enabled = false, blocks = { enabled = true } },
   scratch = { minimal = true },

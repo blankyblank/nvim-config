@@ -42,7 +42,6 @@ require('noice').setup({
     { filter = { event = 'msg_show', any = { { find = 'lines indented' } } },  view = 'mini' },
     { filter = { event = 'msg_show', any = { { find = 'lines >ed' } } },       opts = { skip = true } },
     { filter = { event = 'msg_show', any = { { find = 'lines <ed' } } },       opts = { skip = true } },
-    { filter = { event = 'msg_show', kind = 'confirm' },                       opts = { skip = true } },
   },
 
   lsp = {

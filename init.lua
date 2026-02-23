@@ -13,3 +13,5 @@ vim.opt.termguicolors = true
 
 require("plugins")
 require("config")
+vim.cmd([[set runtimepath+=/usr/local/share/vim/vimfiles]])
+vim.cmd([[let &packpath = &runtimepath]])

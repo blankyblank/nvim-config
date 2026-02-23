@@ -36,7 +36,7 @@ require('conform').setup({
 })
 
 require('conform').formatters.shfmt = {
-  inherit = false,
+  -- inherit = false,
   command = 'shfmt',
   append_args = { '-i', '2', '-s', '-bn' },
   --"-kp", "-mn"
