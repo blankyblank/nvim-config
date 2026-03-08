@@ -49,6 +49,10 @@ require('snacks').setup({
     cwd_bonus = true,
     formatters = {},
     icons = { files = { enabled = false } },
+    layout = {
+      preset = "sidebar",
+      -- preset = "ivy",
+    },
   },
   terminal = {
     enabled = true,
