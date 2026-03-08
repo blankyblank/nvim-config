@@ -1,16 +1,44 @@
-vim.pack.add({
-  Gh('folke/snacks.nvim'),
-})
+vim.pack.add({ Gh('folke/snacks.nvim') })
 
 local Snacks = require('snacks')
 require('snacks').setup({
   animate = { enabled = false },
   bigfile = { enabled = true },
-  dashboard = { enabled = false },
+  dashboard = {
+    enabled = true,
+    padding = 4,
+    indent = 2,
+    sections = {
+      { section = "header" },
+      -- { section = "keys", gap = 1, padding = 1 },
+      { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')", padding = 1, indent = 2 },
+      { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')", padding = 1, indent = 2 },
+      { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert", padding = 1, indent = 2 },
+      { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')", padding = 1, indent = 2 },
+      { icon = " ", key = "p", desc = "Open Project", action = ":NeovimProjectHistory", padding = 1, indent = 2 },
+      { icon = " ", key = "P", desc = "Open Last Project", action = ":NeovimProjectLoadRecent", padding = 1, indent = 2 },
+      { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", padding = 1, indent = 2 },
+      {
+        icon = " ",
+        key = "h",
+        desc = "Find Documentation",
+        padding = 1,
+        indent = 2,
+        action = function()
+          Snacks.picker.help({
+            confirm = function(picker, item)
+              picker:action("jump")
+            end
+          })
+        end,
+      },
+      { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
+    },
+  },
   debug = { enabled = true },
   explorer = { enabled = true, replace_netrw = false },
   input = { enabled = true, backdrop = true },
-  notifier = { enabled = true },
+  notifier = { enabled = false },
   quickfile = { enabled = true },
   scope = { enabled = false, blocks = { enabled = true } },
   scratch = { minimal = true },
@@ -64,6 +92,7 @@ require('snacks').setup({
   --   },
   -- },
 })
+
 vim.api.nvim_create_autocmd('User', {
   callback = function()
     _G.dd = function(...)
@@ -80,20 +109,20 @@ vim.api.nvim_create_autocmd('User', {
       vim.print = _G.dd
     end
 
-    Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>us')
-    Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>uw')
-    Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>uL')
-    Snacks.toggle.diagnostics():map('<leader>ud')
-    Snacks.toggle.line_number():map('<leader>ul')
-    Snacks.toggle.treesitter():map('<leader>uT')
-    Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>ub')
-    Snacks.toggle.inlay_hints():map('<leader>uh')
-    Snacks.toggle.indent():map('<leader>ug')
-    Snacks.toggle.dim():map('<leader>uD')
-    Snacks.toggle.zen():map('<leader>uz')
-    Snacks.toggle.zoom():map('<leader>uZ')
+    Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>ts')
+    Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>tw')
+    Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>tL')
+    Snacks.toggle.diagnostics():map('<leader>td')
+    Snacks.toggle.line_number():map('<leader>tl')
+    Snacks.toggle.treesitter():map('<leader>tT')
+    Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>tb')
+    Snacks.toggle.inlay_hints():map('<leader>th')
+    Snacks.toggle.indent():map('<leader>tg')
+    Snacks.toggle.dim():map('<leader>tD')
+    Snacks.toggle.zen():map('<leader>tz')
+    Snacks.toggle.zoom():map('<leader>tZ')
     Snacks.toggle.option('conceallevel',
-      { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map('<leader>uc')
+      { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map('<leader>tc')
   end,
 })
 
@@ -101,5 +130,19 @@ vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesActionRename',
   callback = function(event)
     Snacks.rename.on_rename_file(event.data.from, event.data.to)
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "snacks_dashboard",
+  callback = function()
+    vim.b.miniindentscope_disable = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SnacksDashboardOpened",
+  callback = function(data)
+    vim.b[data.buf].miniindentscope_disable = true
   end,
 })

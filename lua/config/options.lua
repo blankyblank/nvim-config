@@ -19,12 +19,11 @@ vim.cmd([[
 ]])
 --set.statusline = '%f %(%h%w%M%r%) %= %y'
 set.breakindent = true
+set.cmdheight = 0
 set.completeopt = "menuone,noselect"
 set.confirm = true
 set.cursorline = true
 set.expandtab = true
--- set.formatoptions = 'qjl1'
-set.formatoptions = "tcajnw1"
 set.ignorecase = true
 set.inccommand = "split"
 set.laststatus = 3

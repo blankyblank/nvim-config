@@ -1,6 +1,4 @@
-vim.pack.add({
-  Gh('nvim-mini/mini.nvim'),
-})
+vim.pack.add({ Gh('nvim-mini/mini.nvim') })
 
 require('mini.comment').setup({ options = { ignore_blank_line = true } })
 require('mini.diff').setup()

@@ -59,7 +59,7 @@ end, { desc = 'Re-enable autoformat-on-save' })
 
 local auto_format = true
 
-vim.keymap.set('n', '<leader>uf', function()
+vim.keymap.set('n', '<leader>tf', function()
   auto_format = not auto_format
   if auto_format then
     vim.cmd('FormatEnable')

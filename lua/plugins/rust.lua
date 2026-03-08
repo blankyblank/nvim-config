@@ -1,6 +1,4 @@
-vim.pack.add({
-  Gh('mrcjkb/rustaceanvim')
-})
+vim.pack.add({ Gh('mrcjkb/rustaceanvim') })
 
 local bufnr = vim.api.nvim_get_current_buf()
 vim.keymap.set(
@@ -12,11 +10,18 @@ vim.keymap.set(
   end,
   { silent = true, buffer = bufnr }
 )
-vim.keymap.set(
-  "n",
-  "K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
-  function()
-    vim.cmd.RustLsp({ 'hover', 'actions' })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust" },
+  callback = function()
+    vim.keymap.set(
+      "n",
+      "K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+      function()
+        vim.cmd.RustLsp({ 'hover', 'actions' })
+      end,
+      { silent = true, buffer = bufnr }
+    )
   end,
-  { silent = true, buffer = bufnr }
-)
+  group = vim.api.nvim_create_augroup("Rusthover", { clear = true })
+})

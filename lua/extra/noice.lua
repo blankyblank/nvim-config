@@ -12,7 +12,7 @@ require('noice').setup({
   },
 
   messages = {
-    view = 'mini',
+    view = 'split',
   },
   popupmenu = { enabled = false },
   notify = { enabled = false },
@@ -42,6 +42,7 @@ require('noice').setup({
     { filter = { event = 'msg_show', any = { { find = 'lines indented' } } },  view = 'mini' },
     { filter = { event = 'msg_show', any = { { find = 'lines >ed' } } },       opts = { skip = true } },
     { filter = { event = 'msg_show', any = { { find = 'lines <ed' } } },       opts = { skip = true } },
+    { view = "split",                                                          filter = { event = "msg_show", min_height = 20 }, },
   },
 
   lsp = {

@@ -10,6 +10,9 @@ local highlight = { "CursorLine", "Whitespace" }
 autocmd = vim.api.nvim_create_autocmd
 vim.have_nerd_font = true
 vim.opt.termguicolors = true
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 
 require("plugins")
 require("config")
