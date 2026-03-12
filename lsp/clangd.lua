@@ -4,8 +4,7 @@ return {
     '--background-index',
     '--clang-tidy',
     '--enable-config',
-    '--header-insertion=iwyu',
-    '--header-insertion-decorators',
+    '--header-insertion=never',
     '--completion-style=detailed',
     '--function-arg-placeholders=1',
     '--fallback-style=llvm',
@@ -60,3 +59,6 @@ return {
   },
   settings = {},
 }
+
+-- '--header-insertion=iwyu',
+-- '--header-insertion-decorators',

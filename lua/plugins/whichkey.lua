@@ -11,19 +11,25 @@ require("which-key").setup({
   },
   icons = {
     breadcrumb = "+",
-    separator = " ",
-    group = "",
-    mappings = true,
-    colors = false,
+    separator = ":",
+    group = "+",
+    mappings = false,
+    colors = true,
     keys = { BS = "bkspace =", Esc = "esc =" },
   },
   win = {
+    -- border = "none",
+    -- width = 70,
+    -- height = { min = 4, max = 25 },
     no_overlap = false,
-    border = "single",
-    padding = { 0, 2 },
+    -- border = "single",
+    padding = { 1, 0 },
     wo = { winblend = 0 },
   },
-  layout = { spacing = 10 },
+  layout = {
+    spacing = 16,
+    width = { min = 4 },
+  },
   keys = { scroll_down = "<c-j>", scroll_up = "<c-k>" },
   show_help = false,
   show_keys = false,
@@ -40,3 +46,8 @@ require("which-key").setup({
     },
   },
 })
+
+vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = '#21242c' })
+vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = '#C678DD' })
+vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = '#61AFEF' })
+vim.api.nvim_set_hl(0, "WhichKey", { fg = '#98C379' })

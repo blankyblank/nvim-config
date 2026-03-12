@@ -21,3 +21,17 @@ require('mini.indentscope').setup({
   options = { try_as_border = true },
   symbol = '│',
 })
+
+
+-- to use mini.completion ( needs more work still )
+-- local gen_loader = require('mini.snippets').gen_loader
+-- require('mini.snippets').setup({
+--   snippets = {
+--     gen_loader.from_lang(), -- This includes those defined by friendly-snippets.
+--   },
+--   mappings = {
+--     jump_next = '<Tab>',
+--     jump_prev = '<S-Tab>',
+--   },
+-- })
+-- require('mini.completion').setup()

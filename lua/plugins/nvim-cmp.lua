@@ -2,49 +2,45 @@ vim.pack.add({
   Gh('hrsh7th/nvim-cmp'),
   Gh('rafamadriz/friendly-snippets'),
   Gh('hrsh7th/cmp-nvim-lsp'),
+  Gh('hrsh7th/cmp-nvim-lsp-signature-help'),
   Gh('hrsh7th/cmp-path'),
   Gh('hrsh7th/cmp-buffer'),
   Gh('hrsh7th/cmp-cmdline'),
   Gh('abeldekat/cmp-mini-snippets'),
-  -- Gh('hrsh7th/cmp-vsnip'),
-  -- Gh('hrsh7th/vim-vsnip'),
+
+  -- less visual noise, not as feature rich
   -- Gh("L3MON4D3/LuaSnip"),
   -- Gh("saadparwaiz1/cmp_luasnip"),
 })
--- vim.api.nvim_create_autocmd("PackChanged", {
---   desc = "build deps for luasnip",
---   group = vim.api.nvim_create_augroup("luasnip-install", { clear = true }),
---   callback = function(event)
---     if event.data.kind == "update" then
---       local ok = pcall(vim.system, "make install_jsregexp")
---       if ok then
---         vim.notify("build jsregexp", vim.log.levels.INFO)
---       else
---         vim.notify("failed build", vim.log.levels.WARN)
---       end
---     end
---   end,
--- })
+
+-- if using luasnip do this set up before cmp
+-- require("luasnip.loaders.from_vscode").lazy_load()
+-- local ls = require("luasnip")
+-- vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
+-- vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
 
 local cmp = require('cmp')
--- luasnip.config.setup {}
+-- require("luasnip").setup()
+
 local gen_loader = require('mini.snippets').gen_loader
 require('mini.snippets').setup({
   snippets = {
     gen_loader.from_lang(), -- This includes those defined by friendly-snippets.
+  },
+  mappings = {
+    jump_next = '<Tab>',
+    jump_prev = '<S-Tab>',
   },
 })
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      local insert = MiniSnippets.config.expand.insert or
-          MiniSnippets.default_insert
+      local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
       insert({ body = args.body }) -- Insert at cursor
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip`
       cmp.resubscribe({ 'TextChangedI', 'TextChangedP' })
       require('cmp.config').set_onetime({ sources = {} })
-      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   window = {
@@ -84,6 +80,7 @@ cmp.setup({
     },
   },
 
+  -- to use icons in completion popup
   -- formatting = {
   --   format = function(_, vim_item)
   --     local icon, hl = MiniIcons.get("lsp", vim_item.kind)
@@ -99,16 +96,9 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    {
-      name = 'mini.snippets',
-      options = {
-        use_minisnippets_match_rule = false,
-        only_allow_inline_start = false,
-      },
-    },
-    -- { name = 'vsnip' },
+    { name = 'mini.snippets', },
     -- { name = 'luasnip' },
-  }, {
+    { name = 'nvim_lsp_signature_help' },
     { name = 'path' },
     { name = 'buffer' },
   }),
@@ -116,16 +106,13 @@ cmp.setup({
 
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' },
-  },
+  sources = { { name = 'buffer' } },
 })
 
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' },
-  }, {
     { name = 'cmdline' },
   }),
   matching = { disallow_symbol_nonprefix_matching = false },

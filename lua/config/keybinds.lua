@@ -4,12 +4,16 @@ require('which-key').add({
   { "<leader>d", group = "diagnostics" },
   { "<leader>f", group = "file" },
   { "<leader>g", group = "git" },
-  { "<leader>h", group = "help" },
-  { "<leader>m", group = "manage" },
-  { "<leader>o", group = "open" },
+  { "<leader>h", group = "help", icon = "󰋖" },
+  { "<leader>m", group = "manage", icon = "" },
+  { "<leader>o", group = "open", icon = "" },
   { "<leader>p", group = "projects" },
   { "<leader>s", group = "search" },
   { "<leader>t", group = "toggle" },
+  { '<leader>w', ":w<CR>", desc = 'write', icon = "" },
+  { '<leader>q', ":quit<CR>", desc = 'quit' },
+  { '<leader>z', ":wq<CR>", desc = 'write and quit' },
+  { "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", desc = "Smart Find Files" }
 })
 
 vim.keymap.set('c', '<M-h>', '<Left>', { silent = false, desc = 'Left' })
@@ -45,11 +49,6 @@ vim.keymap.set('n', '<C-Left>', '"<Cmd>vertical resize -" . v:count1 . "<CR>"', 
 vim.keymap.set('n', '<C-Down>', '"<Cmd>resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window height' })
 vim.keymap.set('n', '<C-Up>', '"<Cmd>resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window height' })
 vim.keymap.set('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window width' })
-
-vim.keymap.set("n", '<leader>q', ":quit<CR>", { desc = 'quit' })
-vim.keymap.set("n", '<leader>w', ":w<CR>", { desc = 'write' })
-vim.keymap.set("n", '<leader>z', ":wq<CR>", { desc = 'write and quit' })
-vim.keymap.set('n', "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", { desc = "Smart Find Files" })
 
 --   { desc = "(Trouble) LSP Definitions / references", })
 -- the current file' })
