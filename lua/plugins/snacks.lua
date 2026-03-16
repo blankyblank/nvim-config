@@ -50,7 +50,8 @@ require('snacks').setup({
     formatters = {},
     icons = { files = { enabled = false } },
     layout = {
-      preset = "sidebar",
+      preview = "main",
+      preset = "ivy",
       -- preset = "ivy",
     },
   },

@@ -1,21 +1,3 @@
-require('which-key').add({
-  { "<leader>b", group = "buffer" },
-  { "<leader>c", group = "code" },
-  { "<leader>d", group = "diagnostics" },
-  { "<leader>f", group = "file" },
-  { "<leader>g", group = "git" },
-  { "<leader>h", group = "help", icon = "󰋖" },
-  { "<leader>m", group = "manage", icon = "" },
-  { "<leader>o", group = "open", icon = "" },
-  { "<leader>p", group = "projects" },
-  { "<leader>s", group = "search" },
-  { "<leader>t", group = "toggle" },
-  { '<leader>w', ":w<CR>", desc = 'write', icon = "" },
-  { '<leader>q', ":quit<CR>", desc = 'quit' },
-  { '<leader>z', ":wq<CR>", desc = 'write and quit' },
-  { "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", desc = "Smart Find Files" }
-})
-
 vim.keymap.set('c', '<M-h>', '<Left>', { silent = false, desc = 'Left' })
 vim.keymap.set('c', '<M-l>', '<Right>', { silent = false, desc = 'Right' })
 vim.keymap.set('i', '<M-h>', '<Left>', { noremap = false, desc = 'Left' })
@@ -50,6 +32,10 @@ vim.keymap.set('n', '<C-Down>', '"<Cmd>resize -" . v:count1 . "<CR>"', { expr = 
 vim.keymap.set('n', '<C-Up>', '"<Cmd>resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window height' })
 vim.keymap.set('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window width' })
 
+vim.keymap.set("n", '<leader>q', ":quit<CR>", { desc = 'quit' })
+vim.keymap.set("n", '<leader>w', ":w<CR>", { desc = 'write'})
+vim.keymap.set("n", '<leader>z', ":wq<CR>", { desc = 'write and quit' })
+vim.keymap.set('n', "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", { desc = "Smart Find Files" })
 --   { desc = "(Trouble) LSP Definitions / references", })
 -- the current file' })
 -- vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
@@ -94,7 +80,7 @@ vim.keymap.set('n', "<leader>gs", "<cmd>lua Snacks.picker.git_status()<CR>", { d
 
 vim.keymap.set("n", "<leader>he", "<cmd>NoiceSnacks<CR>", { desc = "search through errors" })
 vim.keymap.set("n", "<leader>hf", function() Snacks.picker.help({ confirm = function(picker, item) picker:action("jump") end }) end)
-vim.keymap.set('n', "<leader>hk", "<cmd>lua Snacks.picker.keymaps() <CR>", { desc = "Keymaps" })
+vim.keymap.set('n', "<leader>hk", "<cmd>lua Snacks.picker.keymaps({ plugs = true}) <CR>", { desc = "Keymaps" })
 vim.keymap.set("n", "<leader>hl", "<cmd>NoiceLast<CR>", { desc = "show last error" })
 
 vim.keymap.set("n", '<leader>mm', ":Mason<CR>", { desc = 'view mason' })
@@ -119,3 +105,4 @@ vim.keymap.set('n', "<leader>sG", "<cmd>lua Snacks.picker.grep_word()<CR>", { de
 vim.keymap.set('n', "<leader>sj", "<cmd>lua Snacks.picker.jumps() <CR>", { desc = "Jumps" })
 vim.keymap.set('n', "<leader>su", "<cmd>lua Snacks.picker.undo()<CR>", { desc = "undo History" })
 vim.keymap.set('n', "<leader>sU", "<cmd>Undotree<CR>", { desc = "Undo History" })
+

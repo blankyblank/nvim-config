@@ -27,10 +27,10 @@ require('mini.snippets').setup({
   snippets = {
     gen_loader.from_lang(), -- This includes those defined by friendly-snippets.
   },
-  mappings = {
-    jump_next = '<Tab>',
-    jump_prev = '<S-Tab>',
-  },
+  -- mappings = {
+  --   jump_next = '<Tab>',
+  --   jump_prev = '<S-Tab>',
+  -- },
 })
 
 cmp.setup({
