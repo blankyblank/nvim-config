@@ -11,6 +11,17 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
+-- was in plugins/snacks can't remember what it was for
+--
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'MiniFilesActionRename',
+--   callback = function(event)
+--     Snacks.rename.on_rename_file(event.data.from, event.data.to)
+--   end,
+-- })
+
+-- codelens none of the lsp's I use have this
+--
 -- vim.api.nvim_create_autocmd("LspAttach", {
 --   callback = function(args)
 --     local bufnr = args.buf

@@ -4,10 +4,46 @@ local Snacks = require('snacks')
 require('snacks').setup({
   animate = { enabled = false },
   bigfile = { enabled = true },
-  dashboard = {
+  debug = { enabled = true },
+  explorer = { enabled = true, replace_netrw = false },
+  input = { enabled = true, backdrop = true },
+  notifier = { enabled = false },
+  quickfile = { enabled = true },
+  scope = { enabled = false, blocks = { enabled = true } },
+  scratch = { minimal = true },
+  scroll = { enabled = false },
+  words = { enabled = true },
+  zen = { toggles = { line_number = false, diagnostics = false, inlay_hints = false, } },
+
+
+  picker = {
     enabled = true,
-    padding = 4,
-    indent = 2,
+    cwd_bonus = true,
+    formatters = {},
+    icons = { files = { enabled = false } },
+    layout = { preview = "main", preset = "ivy", },
+  },
+
+  terminal = {
+    enabled = true,
+    keys = {
+      q = 'hide',
+      gf = function(self)
+        local f = vim.fn.findfile(vim.fn.expand('<cfile>'), '**')
+        if f == '' then
+          Snacks.notify.warn('No file under cursor')
+        else
+          self:hide()
+          vim.schedule(function()
+            vim.cmd('e ' .. f)
+          end)
+        end
+      end,
+    },
+  },
+
+  dashboard = {
+    enabled = true, padding = 4, indent = 2,
     sections = {
       { section = "header" },
       -- { section = "keys", gap = 1, padding = 1 },
@@ -35,50 +71,7 @@ require('snacks').setup({
       { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
     },
   },
-  debug = { enabled = true },
-  explorer = { enabled = true, replace_netrw = false },
-  input = { enabled = true, backdrop = true },
-  notifier = { enabled = false },
-  quickfile = { enabled = true },
-  scope = { enabled = false, blocks = { enabled = true } },
-  scratch = { minimal = true },
-  scroll = { enabled = false },
-  words = { enabled = false },
-  picker = {
-    enabled = true,
-    cwd_bonus = true,
-    formatters = {},
-    icons = { files = { enabled = false } },
-    layout = {
-      preview = "main",
-      preset = "ivy",
-      -- preset = "ivy",
-    },
-  },
-  terminal = {
-    enabled = true,
-    keys = {
-      q = 'hide',
-      gf = function(self)
-        local f = vim.fn.findfile(vim.fn.expand('<cfile>'), '**')
-        if f == '' then
-          Snacks.notify.warn('No file under cursor')
-        else
-          self:hide()
-          vim.schedule(function()
-            vim.cmd('e ' .. f)
-          end)
-        end
-      end,
-    },
-  },
-  zen = {
-    toggles = {
-      line_number = false,
-      diagnostics = false,
-      inlay_hints = false,
-    }
-  },
+
   -- statuscolumn = {
   --   enabled = false,
   --   left = { 'git', 'sign' }, right = { '', '' },
@@ -86,7 +79,6 @@ require('snacks').setup({
   --   git = { patterns = { 'GitSign', 'MiniDiffSign' } },
   --   refresh = 50, -- refresh at most every 50ms
   -- },
-
   -- indent = {
   --   enabled = false,
   --   only_scope = true,
@@ -131,20 +123,12 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesActionRename',
-  callback = function(event)
-    Snacks.rename.on_rename_file(event.data.from, event.data.to)
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "snacks_dashboard",
   callback = function()
     vim.b.miniindentscope_disable = true
   end,
 })
-
 vim.api.nvim_create_autocmd("User", {
   pattern = "SnacksDashboardOpened",
   callback = function(data)
