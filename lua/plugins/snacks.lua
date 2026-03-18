@@ -4,7 +4,7 @@ local Snacks = require('snacks')
 require('snacks').setup({
   animate = { enabled = false },
   scroll = { enabled = false },
-  words = { enabled = false },
+  words = { enabled = true },
   notifier = { enabled = false },
   bigfile = { enabled = true },
   debug = { enabled = true },
@@ -14,6 +14,21 @@ require('snacks').setup({
   scope = { enabled = true, blocks = { enabled = true } },
   scratch = { minimal = true },
   zen = { toggles = { line_number = false, diagnostics = false, inlay_hints = false, } },
+  indent = {
+    enabled = true,
+    only_scope = true,
+    only_current = true,
+    animate = { enabled = false },
+    chunk = { 
+      enabled = true,
+      only_current = true,
+    },
+    scope = {
+      enabled = true,
+      underline = true,
+      only_current = true,
+    },
+  },
 
 
   picker = {
@@ -81,15 +96,6 @@ require('snacks').setup({
   --   git = { patterns = { 'GitSign', 'MiniDiffSign' } },
   --   refresh = 50, -- refresh at most every 50ms
   -- },
-  -- indent = {
-  --   enabled = false,
-  --   only_scope = true,
-  --   animate = { enabled = false },
-  --   scope = {
-  --     enabled = true,
-  --     only_current = true,
-  --   },
-  -- },
 })
 
 vim.api.nvim_create_autocmd('User', {
@@ -126,15 +132,17 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "snacks_dashboard",
-  callback = function()
-    vim.b.miniindentscope_disable = true
-  end,
-})
-vim.api.nvim_create_autocmd("User", {
-  pattern = "SnacksDashboardOpened",
-  callback = function(data)
-    vim.b[data.buf].miniindentscope_disable = true
-  end,
-})
+-- fix problem with indent line on dashboard when using mini.indentscope
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "snacks_dashboard",
+--   callback = function()
+--     vim.b.miniindentscope_disable = true
+--   end,
+-- })
+-- vim.api.nvim_create_autocmd("User", {
+--   pattern = "SnacksDashboardOpened",
+--   callback = function(data)
+--     vim.b[data.buf].miniindentscope_disable = true
+--   end,
+-- })
