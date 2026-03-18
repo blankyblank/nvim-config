@@ -97,7 +97,7 @@ end, { desc = 'delete plugins' })
 
 vim.keymap.set('n', "<leader>oe", "<cmd>lua MiniFiles.open()<CR>", { desc = "open explorer" })
 vim.keymap.set('n', "<leader>os", "<cmd>lua Snacks.explorer()<CR>", { desc = "open sidebar" })
-vim.keymap.set('n', "<leader>oT", "<cmd>lua Snacks.terminal() <CR>", { desc = "which_key_ignore" })
+vim.keymap.set('n', "<leader>oT", "<cmd>lua Snacks.terminal() <CR>", { desc = "open terminal" })
 vim.keymap.set('n', "<leader>ot", "<cmd>lua Snacks.terminal.toggle() <CR>", { desc = "Toggle Terminal" })
 -- vim.keymap.set('n', '<leader>od', '<cmd>Yazi cwd<cr>', { desc = "Open the file manager in nvim's working directory" })
 -- vim.keymap.set('n', '<leader>of', '<cmd>Yazi<cr>', { desc = 'Open yazi at
