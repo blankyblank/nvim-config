@@ -30,7 +30,6 @@ require('snacks').setup({
     },
   },
 
-
   picker = {
     enabled = true,
     cwd_bonus = true,
@@ -38,6 +37,14 @@ require('snacks').setup({
     icons = { files = { enabled = false } },
     layout = { preview = "main", preset = "ivy", },
   },
+
+  -- statuscolumn = {
+  --   enabled = false,
+  --   left = { 'git', 'sign' }, right = { '', '' },
+  --   folds = { open = false, git_hl = false },
+  --   git = { patterns = { 'GitSign', 'MiniDiffSign' } },
+  --   refresh = 50, -- refresh at most every 50ms
+  -- },
 
   terminal = {
     enabled = true,
@@ -68,8 +75,8 @@ require('snacks').setup({
       { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')", padding = 1, indent = 2 },
       { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert", padding = 1, indent = 2 },
       { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')", padding = 1, indent = 2 },
-      { icon = " ", key = "p", desc = "Open Project", action = ":NeovimProjectHistory", padding = 1, indent = 2 },
-      { icon = " ", key = "P", desc = "Open Last Project", action = ":NeovimProjectLoadRecent", padding = 1, indent = 2 },
+      { icon = " ", key = "p", desc = "Select Project", action = ":ProjectSnacks", padding = 1, indent = 2 },
+      { icon = " ", key = "P", desc = "Recent Projects", action = ":ProjectRecents", padding = 1, indent = 2 },
       { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", padding = 1, indent = 2 },
       {
         icon = " ",
@@ -88,14 +95,6 @@ require('snacks').setup({
       { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
     },
   },
-
-  -- statuscolumn = {
-  --   enabled = false,
-  --   left = { 'git', 'sign' }, right = { '', '' },
-  --   folds = { open = false, git_hl = false },
-  --   git = { patterns = { 'GitSign', 'MiniDiffSign' } },
-  --   refresh = 50, -- refresh at most every 50ms
-  -- },
 })
 
 vim.api.nvim_create_autocmd('User', {

@@ -5,8 +5,8 @@ end
 -- snacks relies on mini
 require('plugins.mini')
 require('plugins.snacks')
-require('plugins.neovim-project')
 require('plugins.onedark')
+require('plugins.project')
 require('plugins.treesitter')
 require('plugins.lualine')
 require('plugins.colorizer')

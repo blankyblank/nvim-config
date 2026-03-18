@@ -35,7 +35,8 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = {},
+      -- might remove, i'll test for a bit
+    lualine_b = { { "project", format = 'short', no_project = nil, } },
     lualine_c = {
       "branch",
       {
@@ -54,6 +55,7 @@ require("lualine").setup({
       "lsp_status",
       "diagnostics",
       "filetype",
+      -- leaving just in case I add noice back for some reason
       -- {
       --   require("noice").api.status.mode.get,
       --   cond = require("noice").api.status.mode.has,
@@ -64,16 +66,13 @@ require("lualine").setup({
     lualine_z = {},
   },
 
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {},
+  -- not sure I need delete if nothing seems to happen from commenting out
+  -- inactive_sections = {
+  --   lualine_a = {},
+  --   lualine_b = {},
+  --   lualine_c = { "filename" },
+  --   lualine_x = { "location" },
+  --   lualine_y = {},
+  --   lualine_z = {},
+  -- },
 })

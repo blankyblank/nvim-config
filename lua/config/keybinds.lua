@@ -18,8 +18,6 @@ vim.keymap.set('t', '<M-l>', '<Right>', { desc = 'Right' })
 vim.keymap.set({ 'i', 'n' }, '<M-e>', '<End>', { desc = 'move to end of line' })
 vim.keymap.set('i', '<M-b>', '<ESC>^i', { desc = 'move to beginning of line' })
 vim.keymap.set('n', '<M-b>', '0', { desc = 'move to beginning of line' })
--- vim.keymap.set('n', '<leader>n', '<cmd>lua Snacks.words.jump(1, 1)<CR>', { desc = 'Next reference' })
--- vim.keymap.set('n', '<leader>N', '<cmd>lua Snacks.words.jump(-1, 1)<CR>', { desc = 'Previous reference' })
 vim.keymap.set('n', ']]', '<cmd>lua Snacks.words.jump(1, 1)<CR>', { desc = 'Next Reference' }  )
 vim.keymap.set('n', '[[', '<cmd>lua Snacks.words.jump(-1, 1)<CR>', { desc = 'Prev Reference' }  )
 
@@ -68,7 +66,6 @@ vim.keymap.set('n', "<leader>dd", "<cmd>lua Snacks.picker.diagnostics()<CR>", { 
 
 vim.keymap.set('n', "<leader>fc", '<cmd>lua Snacks.picker.files({ cwd = vim.fn.stdpath("config") })<CR>', { desc = "Find Config File" })
 vim.keymap.set('n', "<leader>ff", "<cmd>lua Snacks.picker.files({ hidden = true })<CR>", { desc = "Files" })
-vim.keymap.set('n', "<leader>fp", "<cmd>lua Snacks.picker.projects()<CR>", { desc = "Projects" })
 vim.keymap.set('n', "<leader>fr", "<cmd>lua Snacks.picker.recent()<CR>", { desc = "Recent" })
 vim.keymap.set("n", '<leader>fS', ":SudaWrite<CR>", { desc = 'file suda write' })
 vim.keymap.set("n", '<leader>fs', ":w<CR>", { desc = 'save' })
@@ -106,10 +103,15 @@ vim.keymap.set('n', "<leader>ot", "<cmd>lua Snacks.terminal.toggle() <CR>", { de
 -- vim.keymap.set('n', '<leader>of', '<cmd>Yazi<cr>', { desc = 'Open yazi at
 -- vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
 
+vim.keymap.set('n', "<leader>pf", "<cmd>ProjectSnacks<CR>", { desc = "Find Project" })
+vim.keymap.set('n', "<leader>ph", "<cmd>ProjectHistory<CR>", { desc = "Project History" })
+vim.keymap.set('n', "<leader>pr", "<cmd>ProjectRecents<CR>", { desc = "Recent Projects" })
+vim.keymap.set('n', "<leader>ps", "<cmd>ProjectSession<CR>", { desc = "Project Sessions" })
+vim.keymap.set('n', "<leader>pS", "<cmd>lua Snacks.picker.projects()<CR>", { desc = "Snacks Project Picker" })
+vim.keymap.set('n', "<leader>pc", "<cmd>ProjectHealth<CR>", { desc = "Project Checkhealth" })
 
 vim.keymap.set('n', "<leader>s:", "<cmd>lua Snacks.picker.command_history()<CR>", { desc = "Command History" })
 vim.keymap.set('n', "<leader>sg", "<cmd>lua Snacks.picker.grep()<CR>", { desc = "in current directory" })
 vim.keymap.set('n', "<leader>sG", "<cmd>lua Snacks.picker.grep_word()<CR>", { desc = "visual selection or word" })
 vim.keymap.set('n', "<leader>sj", "<cmd>lua Snacks.picker.jumps() <CR>", { desc = "Jumps" })
 vim.keymap.set('n', "<leader>su", "<cmd>lua Snacks.picker.undo()<CR>", { desc = "Undo History" })
--- vim.keymap.set('n', "<leader>sU", "<cmd>Undotree<CR>", { desc = "Undo History" })
