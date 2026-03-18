@@ -1,5 +1,6 @@
+-- to use my version of onedark
 -- vim.cmd([[
--- colorscheme onedark
+-- colorscheme onehalf-dark
 -- highlight Normal guibg=none
 -- highlight NonText guibg=none
 -- highlight Normal ctermbg=none

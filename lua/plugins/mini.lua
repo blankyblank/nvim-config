@@ -1,5 +1,6 @@
 vim.pack.add({ Gh('nvim-mini/mini.nvim') })
 
+require('mini.bracketed').setup({})
 require('mini.comment').setup({ options = { ignore_blank_line = true } })
 require('mini.diff').setup()
 require('mini.files').setup({ options = { use_as_default_explorer = true } })
@@ -10,14 +11,14 @@ require('mini.jump').setup({ options = { silent = true } })
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup({ respect_selection_type = true, silent = true })
-require('mini.indentscope').setup({
-  draw = {
-    delay = 100,
-    animation = require('mini.indentscope').gen_animation.none(),
-  },
-  options = { try_as_border = true },
-  symbol = '│',
-})
+-- require('mini.indentscope').setup({
+--   draw = {
+--     delay = 100,
+--     animation = require('mini.indentscope').gen_animation.none(),
+--   },
+--   options = { try_as_border = true },
+--   symbol = '│',
+-- })
 
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -51,10 +52,10 @@ miniclue.setup({
     miniclue.gen_clues.z(),
     { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
     { mode = 'n', keys = '<Leader>c', desc = '+Code' },
-    { mode = 'n', keys = '<Leader>d', desc = '+Diagnostics' },
+    { mode = 'n', keys = '<Leader>d', desc = '+Debug' },
     { mode = 'n', keys = '<Leader>f', desc = '+File' },
     { mode = 'n', keys = '<Leader>g', desc = '+Git' },
-    { mode = 'n', keys = '<Leader>h', desc = '+Hel' },
+    { mode = 'n', keys = '<Leader>h', desc = '+Help' },
     { mode = 'n', keys = '<Leader>m', desc = '+Manage' },
     { mode = 'n', keys = '<Leader>o', desc = '+Open' },
     { mode = 'n', keys = '<Leader>p', desc = '+Projects' },

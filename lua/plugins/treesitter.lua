@@ -4,22 +4,14 @@ vim.pack.add({
     version = 'main',
   },
   {
-    src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
+    src = Gh('nvim-treesitter/nvim-treesitter-textobjects'),
     version = 'main',
+    --https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 })
 
 require('nvim-treesitter').setup({
   install_dir = vim.fn.stdpath('data') .. '/site',
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'gmn',
-      scope_incremental = 'gmc',
-      node_decremental = 'gmm',
-    },
-  },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = { 'ruby' },
@@ -36,7 +28,7 @@ require('nvim-treesitter-textobjects').setup({
       ['@function.outer'] = 'V',  -- linewise
       ['@class.outer'] = '<c-v>', -- blockwise
     },
-    include_surrounding_whitespace = false,
+    include_surrounding_whitespace = true,
   },
   move = {
     enable = true,
@@ -95,5 +87,13 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end,
 })
 
--- vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- vim.api.nvim_create_autocmd('FileType', {
+--   callback = function()
+--     -- Enable syntax highlighting
+--     vim.treesitter.start()
+--     -- vim.wo.foldmethod = 'expr'
+--     -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+--   end,
+-- })
+-- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

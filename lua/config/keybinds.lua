@@ -19,26 +19,24 @@ vim.keymap.set({ 'i', 'n' }, '<M-e>', '<End>', { desc = 'move to end of line' })
 vim.keymap.set('i', '<M-b>', '<ESC>^i', { desc = 'move to beginning of line' })
 vim.keymap.set('n', '<M-b>', '0', { desc = 'move to beginning of line' })
 
-vim.keymap.set("n", "gd", "<cmd>lua Snacks.picker.lsp_definitions()<CR>", { desc = "Goto Definition" })
-vim.keymap.set("n", "gD", "<cmd>lua Snacks.picker.lsp_declarations()<CR>", { desc = "Goto Declaration" })
-vim.keymap.set("n", "gr", "<cmd>lua Snacks.picker.lsp_references()<CR>", { nowait = true, desc = "References" })
-vim.keymap.set("n", "gI", "<cmd>lua Snacks.picker.lsp_implementations()<CR>", { desc = "Goto Implementation" })
-vim.keymap.set('n', "gy", "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>", { desc = "Goto T[y]pe Definition" })
-vim.keymap.set('n', "gai", "<cmd>lua Snacks.picker.lsp_incoming_calls()<CR>", { desc = "C[a]lls Incoming" })
-vim.keymap.set('n', "gao", "<cmd>lua Snacks.picker.lsp_outgoing_calls()<CR>", { desc = "C[a]lls Outgoing" })
-
 vim.keymap.set('n', '<C-Left>', '"<Cmd>vertical resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window width' })
 vim.keymap.set('n', '<C-Down>', '"<Cmd>resize -" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Decrease window height' })
 vim.keymap.set('n', '<C-Up>', '"<Cmd>resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window height' })
 vim.keymap.set('n', '<C-Right>', '"<Cmd>vertical resize +" . v:count1 . "<CR>"', { expr = true, replace_keycodes = false, desc = 'Increase window width' })
+vim.keymap.set("n", "<leader>n", "<cmd>lua Snacks.words.jump(1, 1)<CR>", { desc = "Next reference" })
+vim.keymap.set("n", "<leader>N", "<cmd>lua Snacks.words.jump(-1, 1)<CR>", { desc = "Previous reference" })
 
 vim.keymap.set("n", '<leader>q', ":quit<CR>", { desc = 'quit' })
-vim.keymap.set("n", '<leader>w', ":w<CR>", { desc = 'write'})
+vim.keymap.set("n", '<leader>w', ":w<CR>", { desc = 'write' })
 vim.keymap.set("n", '<leader>z', ":wq<CR>", { desc = 'write and quit' })
 vim.keymap.set('n', "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", { desc = "Smart Find Files" })
---   { desc = "(Trouble) LSP Definitions / references", })
--- the current file' })
--- vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
+
+  vim.keymap.set("n", "<leader>a", function()
+    require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+  end)
+  vim.keymap.set("n", "<leader>A", function()
+    require("nvim-treesitter-textobjects.swap").swap_next "@parameter.outer"
+  end)
 vim.keymap.set('n', "<leader>bf", "<cmd>lua Snacks.picker.buffers()<CR>", { desc = "find" })
 vim.keymap.set("n", '<leader>bn', ":tabnext<CR>", { desc = 'next' })
 vim.keymap.set("n", '<leader>bp', ":tabprevious<CR>", { desc = 'previous' })
@@ -47,20 +45,24 @@ vim.keymap.set('n', "<leader>bx", "<cmd>lua Snacks.scratch()<CR>", { desc = "tog
 vim.keymap.set('n', "<leader>bX", "<cmd>lua Snacks.scratch.select()<CR>", { desc = "Select Scratch Buffer" })
 
 vim.keymap.set("n", '<leader>ca', ":lua vim.lsp.buf.code_action() <CR>", { desc = 'apply action' })
-vim.keymap.set("n", '<leader>cD', ":lua vim.lsp.buf.references() <CR>", { desc = 'show references to symbol' })
-vim.keymap.set("n", '<leader>cd', ":lua vim.lsp.buf.type_definition() <CR>", { desc = 'show type definition' })
+vim.keymap.set("n", "<leader>cd", "<cmd>lua Snacks.picker.lsp_definitions()<CR>", { desc = "Goto Definition" })
+vim.keymap.set("n", "<leader>cD", "<cmd>lua Snacks.picker.lsp_declarations()<CR>", { desc = "Goto Declaration" })
 vim.keymap.set("n", '<leader>ch', "<cmd>LspClangdSwitchSourceHeader<cr>", { desc = "Switch Source/Header (C/C++)" })
 vim.keymap.set("n", '<leader>cI', "<cmd>ClangdSymbolInfo<cr>", { desc = "symbol info (C/C++)" })
+-- vim.keymap.set("n", "<leader>ci", "<cmd>lua Snacks.picker.lsp_implementations()<CR>", { desc = "Goto Implementation" })
 vim.keymap.set("n", '<leader>ci', ":lua vim.lsp.buf.implementation() <CR>", { desc = 'list implementations' })
 vim.keymap.set("n", '<leader>cm', "<cmd>ClangdMemoryUsage<cr>", { desc = "Memory Usage (C/C++)" })
 vim.keymap.set("n", '<leader>cr', ":lua vim.lsp.buf.rename() <CR>", { desc = 'rename symbol' })
+vim.keymap.set("n", '<leader>cR', "<cmd>lua Snacks.picker.lsp_references()<CR>", { nowait = true, desc = "References" })
+-- vim.keymap.set("n", '<leader>cR', ":lua vim.lsp.buf.references() <CR>", { desc = 'show references to symbol' })
 vim.keymap.set("n", "<leader>cs", "<cmd>lua Snacks.picker.lsp_symbols()<CR>", { desc = "LSP Symbols" })
 vim.keymap.set("n", "<leader>cS", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>", { desc = "LSP Workspace Symbols" })
+vim.keymap.set('n', '<leader>ct', "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>", { desc = "Goto T[y]pe Definition" })
+-- vim.keymap.set("n", '<leader>ct', ":lua vim.lsp.buf.type_definition() <CR>", { desc = 'show type definition' })
+
 
 vim.keymap.set('n', "<leader>dD", "<cmd>lua Snacks.picker.diagnostics_buffer()<CR>", { desc = "Buffer Diagnostics" })
 vim.keymap.set('n', "<leader>dd", "<cmd>lua Snacks.picker.diagnostics()<CR>", { desc = "Diagnostics" })
--- vim.keymap.set('n', '<leader>ed', '<cmd>Yazi cwd<cr>', { desc = "Open the file manager in nvim's working directory" })
--- vim.keymap.set('n', '<leader>ef', '<cmd>Yazi<cr>', { desc = 'Open yazi at
 
 vim.keymap.set('n', "<leader>fc", '<cmd>lua Snacks.picker.files({ cwd = vim.fn.stdpath("config") })<CR>', { desc = "Find Config File" })
 vim.keymap.set('n', "<leader>ff", "<cmd>lua Snacks.picker.files({ hidden = true })<CR>", { desc = "Files" })
@@ -98,11 +100,14 @@ vim.keymap.set('n', "<leader>oe", "<cmd>lua MiniFiles.open()<CR>", { desc = "ope
 vim.keymap.set('n', "<leader>os", "<cmd>lua Snacks.explorer()<CR>", { desc = "open sidebar" })
 vim.keymap.set('n', "<leader>oT", "<cmd>lua Snacks.terminal() <CR>", { desc = "which_key_ignore" })
 vim.keymap.set('n', "<leader>ot", "<cmd>lua Snacks.terminal.toggle() <CR>", { desc = "Toggle Terminal" })
+-- vim.keymap.set('n', '<leader>od', '<cmd>Yazi cwd<cr>', { desc = "Open the file manager in nvim's working directory" })
+-- vim.keymap.set('n', '<leader>of', '<cmd>Yazi<cr>', { desc = 'Open yazi at
+-- vim.keymap.set('n', '<c-y>', '<cmd>Yazi toggle<cr>', { desc = 'Resume the last yazi session' })
+
 
 vim.keymap.set('n', "<leader>s:", "<cmd>lua Snacks.picker.command_history()<CR>", { desc = "Command History" })
 vim.keymap.set('n', "<leader>sg", "<cmd>lua Snacks.picker.grep()<CR>", { desc = "in current directory" })
 vim.keymap.set('n', "<leader>sG", "<cmd>lua Snacks.picker.grep_word()<CR>", { desc = "visual selection or word" })
 vim.keymap.set('n', "<leader>sj", "<cmd>lua Snacks.picker.jumps() <CR>", { desc = "Jumps" })
-vim.keymap.set('n', "<leader>su", "<cmd>lua Snacks.picker.undo()<CR>", { desc = "undo History" })
-vim.keymap.set('n', "<leader>sU", "<cmd>Undotree<CR>", { desc = "Undo History" })
-
+vim.keymap.set('n', "<leader>su", "<cmd>lua Snacks.picker.undo()<CR>", { desc = "Undo History" })
+-- vim.keymap.set('n', "<leader>sU", "<cmd>Undotree<CR>", { desc = "Undo History" })

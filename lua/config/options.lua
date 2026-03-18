@@ -13,10 +13,11 @@ vim.filetype.add({
 
 vim.cmd([[
   packadd! nohlsearch
-  packadd! nvim.undotree
-  packadd! cfilter
   packadd! termdebug
 ]])
+vim.g.termdebugger = "gdb"
+-- packadd! nvim.undotree
+
 --set.statusline = '%f %(%h%w%M%r%) %= %y'
 set.breakindent = true
 set.cmdheight = 0

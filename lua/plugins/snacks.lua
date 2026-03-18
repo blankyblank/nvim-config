@@ -3,16 +3,16 @@ vim.pack.add({ Gh('folke/snacks.nvim') })
 local Snacks = require('snacks')
 require('snacks').setup({
   animate = { enabled = false },
+  scroll = { enabled = false },
+  words = { enabled = false },
+  notifier = { enabled = false },
   bigfile = { enabled = true },
   debug = { enabled = true },
   explorer = { enabled = true, replace_netrw = false },
   input = { enabled = true, backdrop = true },
-  notifier = { enabled = false },
   quickfile = { enabled = true },
-  scope = { enabled = false, blocks = { enabled = true } },
+  scope = { enabled = true, blocks = { enabled = true } },
   scratch = { minimal = true },
-  scroll = { enabled = false },
-  words = { enabled = true },
   zen = { toggles = { line_number = false, diagnostics = false, inlay_hints = false, } },
 
 
@@ -43,7 +43,9 @@ require('snacks').setup({
   },
 
   dashboard = {
-    enabled = true, padding = 4, indent = 2,
+    enabled = true,
+    padding = 4,
+    indent = 2,
     sections = {
       { section = "header" },
       -- { section = "keys", gap = 1, padding = 1 },
@@ -116,6 +118,7 @@ vim.api.nvim_create_autocmd('User', {
     Snacks.toggle.inlay_hints():map('<leader>th')
     Snacks.toggle.indent():map('<leader>tg')
     Snacks.toggle.dim():map('<leader>tD')
+    Snacks.toggle.words():map('<leader>tW')
     Snacks.toggle.zen():map('<leader>tz')
     Snacks.toggle.zoom():map('<leader>tZ')
     Snacks.toggle.option('conceallevel',
