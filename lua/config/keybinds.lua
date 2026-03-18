@@ -31,12 +31,6 @@ vim.keymap.set("n", '<leader>w', ":w<CR>", { desc = 'write' })
 vim.keymap.set("n", '<leader>z', ":wq<CR>", { desc = 'write and quit' })
 vim.keymap.set('n', "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", { desc = "Smart Find Files" })
 
-  vim.keymap.set("n", "<leader>a", function()
-    require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
-  end)
-  vim.keymap.set("n", "<leader>A", function()
-    require("nvim-treesitter-textobjects.swap").swap_next "@parameter.outer"
-  end)
 vim.keymap.set('n', "<leader>bf", "<cmd>lua Snacks.picker.buffers()<CR>", { desc = "find" })
 vim.keymap.set("n", '<leader>bn', ":tabnext<CR>", { desc = 'next' })
 vim.keymap.set("n", '<leader>bp', ":tabprevious<CR>", { desc = 'previous' })
