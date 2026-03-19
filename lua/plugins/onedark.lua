@@ -23,7 +23,9 @@ require("onedarkpro").setup({
     Comment = { fg = "#7f848e", italic = true },
     Identifier = { fg = "${funcs}"  },
     Operator = { fg = "${ops}", bold = true },
-    Function = { fg = "${funcs}", bold = true, italic = true },
+    Function = { fg = "${ops}", italic = true },
+    ["@function"] = { fg = "${funcs}", italic = true },
+    ["@function.declaration.c"] = { fg = "${funcs}", bold = true, italic = true },
     ["@function.builtin.c"] = { fg = "${funcs}", italic = true },
     ["@lsp.typemod.function.defaultLibrary.c"] = { fg = "${funcs}", italic = true },
     ["@character.printf"] = { fg = "#d19a66" },
@@ -34,7 +36,11 @@ require("onedarkpro").setup({
     ["@lsp.typemod.variable.readonly.c"] = { fg = "${var_ro}", bold = true },
     ["@variable.parameter.c"] = { fg = "${params}", bold = true, italic = true },
     Statement = { fg = "${ops}" },
+    ["@lsp.type.operator.c"] = { fg = "${funcs}", bold = true },
+    ["@operator"] = { fg = "${funcs}", bold = true},
+    ["@punctuation.bracket"] = { fg = "${ops}" },
     ["@Keyword.modifier.c"] = { fg = "${ops}" },
+    ["@Keyword.conditional.c"] = { fg = "${ops}" },
     ["@type.builtin.c"] = { fg = "${funcs}" },
     ["@type.qualifier.c"] = { fg = "${funcs}" },
     Keyword = { fg = "${ops}" },
@@ -46,6 +52,6 @@ require("onedarkpro").setup({
 
   options = { cursorline = true, terminal_colors = false },
   filetypes = { all = false, },
-  plugins = { treesitter = false, },
+  plugins = { treesitter = true, },
 })
 vim.cmd("colorscheme onedark")
