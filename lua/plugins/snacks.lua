@@ -8,12 +8,27 @@ require('snacks').setup({
   notifier = { enabled = false },
   bigfile = { enabled = true },
   debug = { enabled = true },
-  explorer = { enabled = true, replace_netrw = false },
+  explorer = { enabled = false, replace_netrw = false },
   input = { enabled = true, backdrop = true },
+  lazygit = { enabled = true, },
   quickfile = { enabled = true },
   scope = { enabled = true, blocks = { enabled = true } },
   scratch = { minimal = true },
-  zen = { toggles = { line_number = false, diagnostics = false, inlay_hints = false, } },
+  zen = {
+    toggles = {
+      line_number = false,
+      diagnostics = false,
+      inlay_hints = false,
+    },
+    center = false,
+    -- zoom = {
+    --   center = true,
+    --     win = {
+    --       backdrop = false,
+    --       width = 0, -- full width
+    --     },
+    -- },
+  },
   indent = {
     enabled = true,
     only_scope = true,
@@ -95,6 +110,25 @@ require('snacks').setup({
       { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
     },
   },
+
+  styles = {
+    zen = {
+      enter = true,
+      fixbuf = false,
+      minimal = false,
+      width = 130,
+      height = 0,
+      backdrop = { transparent = false, blend = 99 },
+      keys = { q = false },
+      zindex = 40,
+      wo = {
+        winhighlight = "NormalFloat:Normal",
+      },
+      w = {
+        snacks_main = true,
+      },
+     }
+  }
 })
 
 vim.api.nvim_create_autocmd('User', {
