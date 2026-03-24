@@ -3,20 +3,22 @@ vim.pack.add({
 })
 
 local color = require('onedarkpro.helpers')
-require("onedarkpro").setup({
 
+require("onedarkpro").setup({
   colors = {
     float_bg = "#282c34",
     inlay_hint = "#7f848e",
-    params = "require('onedarkpro.helpers').lighten('red', 7, 'onedark')",
+
     consts = "#e5c07b",
     ops = "#E6E6E6",
     funcs = "#abb2bf",
-    var_ro = "require('onedarkpro.helpers').lighten('yellow', 7, 'onedark')",
-    virtual_text_error = "require('onedarkpro.helpers').darken('red', 30, 'onedark')",
-    virtual_text_warning = "require('onedarkpro.helpers').darken('yellow', 30, 'onedark')",
-    virtual_text_information = "require('onedarkpro.helpers').darken('blue', 20, 'onedark')",
-    virtual_text_hint = "require('onedarkpro.helpers').darken('cyan', 10, 'onedark')",
+    var_ro = color.lighten('yellow', 7, 'onedark'),
+
+    -- NOTE: uncomment for darker diagnostic messages
+    -- virtual_text_error = color.darken('red', 30, 'onedark'),
+    -- virtual_text_warning = color.darken('yellow', 30, 'onedark'),
+    -- virtual_text_information = color.darken('blue', 20, 'onedark'),
+    -- virtual_text_hint = color.darken('cyan', 10, 'onedark'),
   },
 
   highlights = {
@@ -34,7 +36,7 @@ require("onedarkpro").setup({
     ["@variable.c"] = { fg = "#e06c75" },
     ["@lsp.type.variable.c"] = { fg = "#e06c75" },
     ["@lsp.typemod.variable.readonly.c"] = { fg = "${var_ro}", bold = true },
-    ["@variable.parameter.c"] = { fg = "${params}", bold = true, italic = true },
+    ["@variable.parameter.c"] = { fg = color.lighten('red', 7, 'onedark'), bold = true, italic = true },
     Statement = { fg = "${ops}" },
     ["@lsp.type.operator.c"] = { fg = "${funcs}", bold = true },
     ["@operator"] = { fg = "${funcs}", bold = true},
@@ -49,7 +51,6 @@ require("onedarkpro").setup({
     ["@Keyword.import.c"] = { fg = "#61AFEF" },
     ["@label.c"] = { fg = "#61AFEF" },
   },
-
   options = { cursorline = true, terminal_colors = false },
   filetypes = { all = false, },
   plugins = { treesitter = true, },
