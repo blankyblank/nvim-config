@@ -88,13 +88,14 @@ require('snacks').setup({
     sections = {
       { section = "header" },
       -- { section = "keys", gap = 1, padding = 1 },
-      { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')", padding = 1, indent = 2 },
+      { icon = "󱋡 ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')", padding = 1, indent = 2 },
+      { icon = " ", key = "d", desc = "Start Debug Session", action = "<Cmd>LaunchTermDebug<CR>", padding = 1, indent = 2 },
       { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')", padding = 1, indent = 2 },
       { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert", padding = 1, indent = 2 },
-      { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')", padding = 1, indent = 2 },
-      { icon = " ", key = "p", desc = "Select Project", action = ":ProjectSnacks", padding = 1, indent = 2 },
+      { icon = "󰺯 ", key = "g", desc = "Search Text", action = ":lua Snacks.dashboard.pick('live_grep')", padding = 1, indent = 2 },
+      { icon = " ", key = "p", desc = "Select Project", action = ":ProjectSnacks", padding = 1, indent = 2 },
       { icon = " ", key = "P", desc = "Recent Projects", action = ":ProjectRecents", padding = 1, indent = 2 },
-      { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", padding = 1, indent = 2 },
+      { icon = " ", key = "c", desc = "Edit Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})", padding = 1, indent = 2 },
       {
         icon = " ",
         key = "h",

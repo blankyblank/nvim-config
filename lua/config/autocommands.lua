@@ -11,6 +11,31 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
+-- User Commands
+vim.api.nvim_create_user_command("LaunchTermDebug", function()
+  vim.ui.input({ prompt = 'Binary for debug session:' }, function(input)
+    if input then
+      vim.cmd("Termdebug" .. input)
+    end
+  end)
+end, { nargs = 0, desc = 'start termdebug with a binary'})
+
+vim.api.nvim_create_user_command("PackRemove", function()
+  vim.ui.input({ prompt = 'Enter packages to remove: ' }, function(input)
+    if input then
+      vim.pack.del({ input })
+    end
+  end)
+end, { nargs = 0, desc = 'delete plugins' })
+
+vim.api.nvim_create_user_command('PackRemoveAllUnused', function()
+  vim.pack.del(
+  vim.iter(vim.pack.get())
+  :filter(function(x) return not x.active end)
+  :map(function(x) return x.spec.name end)
+  :totable()
+) end, { nargs = 0, desc = 'delete all inactive plugins' })
+
 -- was in plugins/snacks can't remember what it was for
 --
 -- vim.api.nvim_create_autocmd('User', {

@@ -43,10 +43,10 @@ set.wrap = false
 
 vim.cmd([[
   pa! nohlsearch
+  pa! termdebug
 ]])
 --  NOTE: add one of these into vim.cmd to load them on startup
 --[[
-  pa! termdebug
   pa! nvim.undotree
 ]]
 vim.g.termdebugger = "gdb"

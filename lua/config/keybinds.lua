@@ -59,14 +59,7 @@ vim.keymap.set('n', '<leader>cst', "<cmd>lua Snacks.picker.lsp_type_definitions(
 
 vim.keymap.set('n', "<leader>dD", "<cmd>lua Snacks.picker.diagnostics_buffer()<CR>", { desc = "Buffer Diagnostics" })
 vim.keymap.set('n', "<leader>dd", "<cmd>lua Snacks.picker.diagnostics()<CR>", { desc = "Diagnostics" })
-vim.keymap.set('n', "<leader>dt", function()
-  vim.ui.input({ prompt = 'Binary for debug session:' }, function(input)
-    if input then
-      vim.cmd('pa! termdebug')
-      vim.cmd("Termdebug" .. input)
-    end
-  end)
-end, { desc = "TermDebug" })
+vim.keymap.set('n', "<leader>dt", "<cmd>LaunchTermDebug<CR>", { desc = "TermDebug" })
 
 vim.keymap.set('n', "<leader>fc", '<cmd>lua Snacks.picker.files({ cwd = vim.fn.stdpath("config") })<CR>', { desc = "Edit Config" })
 vim.keymap.set('n', "<leader>ff", "<cmd>lua Snacks.picker.files({ hidden = true })<CR>", { desc = "Find" })
@@ -93,21 +86,8 @@ vim.keymap.set("n", "<leader>hl", "<cmd>NoiceLast<CR>", { desc = "show last erro
 vim.keymap.set("n", '<leader>mm', ":Mason<CR>", { desc = 'view mason' })
 vim.keymap.set("n", '<leader>mp', "<cmd>lua vim.pack.update(nil, { offline = true })<CR>", { desc = 'show installed plugins' })
 vim.keymap.set("n", '<leader>mu', "<cmd>lua vim.pack.update()<CR>", { desc = 'update plugins' })
-vim.keymap.set("n", '<leader>md', function()
-  vim.ui.input({ prompt = 'Enter packages to remove: ' }, function(input)
-    if input then
-      vim.pack.del({ input })
-    end
-  end)
-end, { desc = 'delete plugins' })
-vim.keymap.set("n", '<leader>mD', function()
-  vim.pack.del(
-  vim.iter(vim.pack.get())
-  :filter(function(x) return not x.active end)
-  :map(function(x) return x.spec.name end)
-  :totable()
-)
-end, { desc = 'delete all inactive plugins' })
+vim.keymap.set("n", '<leader>md', "<cmd>PackRemove<CR>", { desc = 'delete plugins' })
+vim.keymap.set("n", '<leader>mD', "<cmd>PackRemoveAllUnused<CR>", { desc = 'delete all inactive plugins' })
 
 vim.keymap.set('n', "<leader>oe", "<cmd>lua MiniFiles.open()<CR>", { desc = "Open explorer" })
 vim.keymap.set('n', "<leader>os", "<cmd>NvimTreeToggle<CR>", { desc = "Open sidebar" })
