@@ -14,21 +14,6 @@ require('snacks').setup({
   quickfile = { enabled = true },
   scope = { enabled = true, blocks = { enabled = true } },
   scratch = { minimal = true },
-  zen = {
-    toggles = {
-      line_number = false,
-      diagnostics = false,
-      inlay_hints = false,
-    },
-    center = false,
-    -- zoom = {
-    --   center = true,
-    --     win = {
-    --       backdrop = false,
-    --       width = 0, -- full width
-    --     },
-    -- },
-  },
   indent = {
     enabled = true,
     only_scope = true,
@@ -77,6 +62,23 @@ require('snacks').setup({
         end
       end,
     },
+  },
+
+  zen = {
+    toggles = {
+      words = false,
+      line_number = false,
+      diagnostics = false,
+      inlay_hints = false,
+    },
+    center = false,
+    -- zoom = {
+    --   center = true,
+    --     win = {
+    --       backdrop = false,
+    --       width = 0, -- full width
+    --     },
+    -- },
   },
 
   dashboard = {
