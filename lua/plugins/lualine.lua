@@ -9,33 +9,21 @@ require("lualine").setup({
     theme = custom_onedark,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { statusline = {}, winbar = {} },
     ignore_focus = { "undotree" },
     always_divide_middle = true,
-    always_show_tabline = true,
+    always_show_tabline = false,
     globalstatus = true,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-      refresh_time = 16, -- ~60fps
-      events = {
-        "WinEnter",
-        "BufEnter",
-        "BufWritePost",
-        "SessionLoadPost",
-        "FileChangedShellPost",
-        "VimResized",
-        "Filetype",
-        "CursorMoved",
-        "CursorMovedI",
-        "ModeChanged",
-      },
-    },
+  },
+
+  extensions = { 'nvim-tree', 'man', 'mason', 'quickfix' },
+  tabline = {
+    -- TODO: find highlight group for lualine_a tabline and change
+    -- lualine_a = {'buffers'},
+    lualine_b = {'buffers'},
   },
   sections = {
     lualine_a = { "mode" },
-      -- might remove, i'll test for a bit
+      -- TODO: might remove, i'll test for a bit
     lualine_b = { { "project", format = 'short', no_project = nil, } },
     lualine_c = {
       "branch",
@@ -50,12 +38,12 @@ require("lualine").setup({
       },
       "filename",
     },
-
     lualine_x = {
+      "searchcount",
       "lsp_status",
       "diagnostics",
       "filetype",
-      -- leaving just in case I add noice back for some reason
+      -- NOTE: leaving just in case I add noice back for some reason
       -- {
       --   require("noice").api.status.mode.get,
       --   cond = require("noice").api.status.mode.has,
@@ -65,14 +53,4 @@ require("lualine").setup({
     lualine_y = {},
     lualine_z = {},
   },
-
-  -- not sure I need delete if nothing seems to happen from commenting out
-  -- inactive_sections = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = { "filename" },
-  --   lualine_x = { "location" },
-  --   lualine_y = {},
-  --   lualine_z = {},
-  -- },
 })
