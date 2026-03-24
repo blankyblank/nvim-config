@@ -52,6 +52,7 @@ miniclue.setup({
     miniclue.gen_clues.z(),
     { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
     { mode = 'n', keys = '<Leader>c', desc = '+Code' },
+    { mode = 'n', keys = '<Leader>cs', desc = '+Search' },
     { mode = 'n', keys = '<Leader>d', desc = '+Debug' },
     { mode = 'n', keys = '<Leader>f', desc = '+File' },
     { mode = 'n', keys = '<Leader>g', desc = '+Git' },
