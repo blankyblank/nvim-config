@@ -6,19 +6,12 @@ vim.filetype.add({
     [".*/kitty/*.conf"] = "bash",
     [".*/tofi/config"] = "config",
     ["*.h"] = "c",
-    --    ['.*/hypr/.*%.conf'] = 'hyprlang',
+    ['.*/hypr/.*%.conf'] = 'hyprlang',
     [".*/nvimbacks/.*%.conf"] = "hyprlang",
   },
 })
 
-vim.cmd([[
-  packadd! nohlsearch
-  packadd! termdebug
-]])
-vim.g.termdebugger = "gdb"
--- packadd! nvim.undotree
-
---set.statusline = '%f %(%h%w%M%r%) %= %y'
+--set.statusline = '%f %(%h%w%M%r%) %= %y' -- NOTE: if not using lualine
 set.breakindent = true
 set.cmdheight = 0
 set.completeopt = "menuone,noselect"
@@ -35,8 +28,8 @@ set.scrolloff = 38
 set.shiftwidth = 2
 set.showcmd = false
 set.showmode = false
--- set.signcolumn = "yes:1"
-set.signcolumn = "no"
+set.signcolumn = "yes:1"
+-- set.signcolumn = "no" -- NOTE: for no sign column
 set.smartcase = true
 set.smartindent = true
 set.spelllang = "en_us"
@@ -47,3 +40,14 @@ set.undofile = true
 set.virtualedit = "block"
 set.winborder = "single"
 set.wrap = false
+
+vim.cmd([[
+  pa! nohlsearch
+]])
+--  NOTE: add one of these into vim.cmd to load them on startup
+--[[
+  pa! termdebug
+  pa! nvim.undotree
+]]
+vim.g.termdebugger = "gdb"
+
