@@ -108,7 +108,7 @@ vim.keymap.set('n', "<leader>pc", "<cmd>ProjectHealth<CR>", { desc = "Project Ch
 
 vim.keymap.set('n', "<leader>s:", "<cmd>lua Snacks.picker.command_history()<CR>", { desc = "Command History" })
 vim.keymap.set('n', "<leader>sf", "<cmd>lua Snacks.picker.lines()<CR>", { desc = "in current file" })
-vim.keymap.set('n', "<leader>sg", "<cmd>lua Snacks.picker.grep()<CR>", { desc = "in current directory" })
-vim.keymap.set('n', "<leader>sG", "<cmd>lua Snacks.picker.grep_word()<CR>", { desc = "visual selection or word" })
+vim.keymap.set('n', "<leader>sd", "<cmd>lua Snacks.picker.grep()<CR>", { desc = "in current directory" })
+vim.keymap.set('n', "<leader>sg", "<cmd>lua Snacks.picker.grep_word()<CR>", { desc = "visual selection or word" })
 vim.keymap.set('n', "<leader>sj", "<cmd>lua Snacks.picker.jumps() <CR>", { desc = "Jumps" })
 vim.keymap.set('n', "<leader>su", "<cmd>lua Snacks.picker.undo()<CR>", { desc = "Undo History" })
