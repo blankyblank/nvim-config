@@ -15,6 +15,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 
+-- require("extra")
+require("config.hooks")
 require("plugins")
 require("config")
 vim.cmd([[set runtimepath+=/usr/local/share/vim/vimfiles]])
