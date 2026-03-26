@@ -1,7 +1,7 @@
 vim.pack.add({ Gh('nvim-mini/mini.nvim') })
 
 require('mini.bracketed').setup({})
-require('mini.comment').setup({ options = { ignore_blank_line = true } })
+-- require('mini.comment').setup({ options = { ignore_blank_line = true } })
 require('mini.diff').setup()
 -- require('mini.files').setup({ options = { use_as_default_explorer = false } })
 require('mini.git').setup()
