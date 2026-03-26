@@ -52,20 +52,20 @@ vim.api.nvim_set_hl(0, "WhichKeyGroup", { fg = '#C678DD' })
 vim.api.nvim_set_hl(0, "WhichKeyDesc", { fg = '#61AFEF' })
 vim.api.nvim_set_hl(0, "WhichKey", { fg = '#98C379' })
 
--- require('which-key').add({
---   { "<leader>b", group = "buffer" },
---   { "<leader>c", group = "code" },
---   { "<leader>d", group = "diagnostics" },
---   { "<leader>f", group = "file" },
---   { "<leader>g", group = "git" },
---   { "<leader>h", group = "help", icon = "󰋖" },
---   { "<leader>m", group = "manage", icon = "" },
---   { "<leader>o", group = "open", icon = "" },
---   { "<leader>p", group = "projects" },
---   { "<leader>s", group = "search" },
---   { "<leader>t", group = "toggle" },
---   { '<leader>w', ":w<CR>", desc = 'write', icon = "" },
---   { '<leader>q', ":quit<CR>", desc = 'quit' },
---   { '<leader>z', ":wq<CR>", desc = 'write and quit' },
---   { "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", desc = "Smart Find Files" }
+require('which-key').add({
+  { "<leader>b", group = "buffer" },
+  { "<leader>c", group = "code" },
+  { "<leader>d", group = "diagnostics" },
+  { "<leader>f", group = "file" },
+  { "<leader>g", group = "git" },
+  { "<leader>h", group = "help", icon = "󰋖" },
+  { "<leader>m", group = "manage", icon = "" },
+  { "<leader>o", group = "open", icon = "" },
+  { "<leader>p", group = "projects" },
+  { "<leader>s", group = "search" },
+  { "<leader>t", group = "toggle" },
+  { '<leader>w', ":w<CR>", desc = 'write', icon = "" },
+  { '<leader>q', ":quit<CR>", desc = 'quit' },
+  { '<leader>z', ":wq<CR>", desc = 'write and quit' },
+  { "<leader><space>", "<cmd>lua Snacks.picker.smart()<CR>", desc = "Smart Find Files" }
 -- })
