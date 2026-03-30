@@ -11,6 +11,18 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function()
+    if not vim.g.leave_my_cursor_position_alone then
+      local mark = vim.api.nvim_buf_get_mark(0, '"')
+      local line_count = vim.api.nvim_buf_line_count(0)
+      if mark[1] > 0 and mark[1] <= line_count then
+        pcall(vim.api.nvim_win_set_cursor, 0, mark)
+      end
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
 	pattern = "help",
   callback = function()
