@@ -11,7 +11,18 @@ vim.api.nvim_create_autocmd('UIEnter', {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
+	pattern = "help",
+  callback = function()
+    vim.api.nvim_command("set invlist")
+    vim.api.nvim_command("syntax off")
+    vim.api.nvim_command("set undolevels=-1")
+    Snacks.indent.disable() --comment out if not using snacks indent
+  end,
+})
+
 -- User Commands
+--
 vim.api.nvim_create_user_command("LaunchTermDebug", function()
   vim.ui.input({ prompt = 'Binary for debug session:' }, function(input)
     if input then
