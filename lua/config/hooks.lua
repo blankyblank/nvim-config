@@ -1,3 +1,4 @@
+local M = {}
 -- NOTE: put hooks in this that need to run early.
 
 -- to install jsregexp for LuaSnip
@@ -8,3 +9,4 @@ local hooks = function(ev)
     end
 end
 vim.api.nvim_create_autocmd('PackChanged', {callback = hooks})
+return M

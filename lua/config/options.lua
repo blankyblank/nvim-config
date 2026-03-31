@@ -1,3 +1,4 @@
+local M = {}
 set = vim.o
 
 vim.diagnostic.config({ virtual_text = true })
@@ -50,4 +51,4 @@ vim.cmd([[
   pa! nvim.undotree
 ]]
 vim.g.termdebugger = "gdb"
-
+return M

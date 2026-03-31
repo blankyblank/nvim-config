@@ -81,9 +81,10 @@ require('snacks').setup({
     -- },
   },
 
+  -- NOTE: set to true and uncomment below to use the dashboard
   dashboard = {
-    enabled = true,
-    padding = 4,
+    enabled = false,
+    --[[ padding = 4,
     indent = 2,
     sections = {
       { section = "header" },
@@ -111,7 +112,7 @@ require('snacks').setup({
         end,
       },
       { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
-    },
+    }, ]]
   },
 
   styles = {

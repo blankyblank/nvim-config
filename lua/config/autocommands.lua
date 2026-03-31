@@ -1,3 +1,4 @@
+local M = {}
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   callback = function()
@@ -74,3 +75,4 @@ vim.api.nvim_create_user_command('PackRemoveAllUnused', function()
 --     end
 --   end,
 -- })
+return M

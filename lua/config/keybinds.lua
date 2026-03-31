@@ -1,3 +1,4 @@
+local M = {}
 vim.keymap.set('c', '<M-h>', '<Left>', { silent = false, desc = 'Left' })
 vim.keymap.set('c', '<M-l>', '<Right>', { silent = false, desc = 'Right' })
 vim.keymap.set('i', '<M-h>', '<Left>', { noremap = false, desc = 'Left' })
@@ -112,3 +113,4 @@ vim.keymap.set('n', "<leader>sd", "<cmd>lua Snacks.picker.grep()<CR>", { desc = 
 vim.keymap.set('n', "<leader>sg", "<cmd>lua Snacks.picker.grep_word()<CR>", { desc = "visual selection or word" })
 vim.keymap.set('n', "<leader>sj", "<cmd>lua Snacks.picker.jumps() <CR>", { desc = "Jumps" })
 vim.keymap.set('n', "<leader>su", "<cmd>lua Snacks.picker.undo()<CR>", { desc = "Undo History" })
+return M
