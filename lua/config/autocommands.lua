@@ -1,4 +1,7 @@
 local M = {}
+
+--  NOTE:
+--       AutoCommands
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   callback = function()
@@ -34,8 +37,9 @@ vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
   end,
 })
 
--- User Commands
---
+--  NOTE:
+--       User Commands
+
 vim.api.nvim_create_user_command("LaunchTermDebug", function()
   vim.ui.input({ prompt = 'Binary for debug session:' }, function(input)
     if input then

@@ -10,6 +10,7 @@ vim.pack.add({
   },
 })
 
+
 require('nvim-treesitter').setup({
   install_dir = vim.fn.stdpath('data') .. '/site',
   highlight = {
@@ -17,6 +18,34 @@ require('nvim-treesitter').setup({
     additional_vim_regex_highlighting = { 'ruby' },
   },
   indent = { enable = true, disable = { 'ruby' } },
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '*' },
+  callback = function(event)
+    local ft = event.match
+    local lang = vim.treesitter.language.get_lang(ft) or ft
+    local buf = event.buf
+
+    -- Auto-install missing parsers asynchronously
+    if not vim.treesitter.language.add(lang) then
+      local available = vim.g.ts_available or require('nvim-treesitter').get_available()
+      if not vim.g.ts_available then vim.g.ts_available = available end
+      if vim.tbl_contains(available, lang) then
+        require('nvim-treesitter').install({ lang })
+      end
+    end
+
+    -- Start tree-sitter once the language is added
+    if vim.treesitter.language.add(lang) then
+      vim.treesitter.start(buf, lang)
+      
+      -- Enable indentation if the language supports it
+      if vim.treesitter.query.get(lang, "indents") then
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end
+  end,
 })
 
 require('nvim-treesitter-textobjects').setup({
@@ -72,20 +101,9 @@ for _, map in ipairs({
   end, { desc = 'Move to ' .. qstr })
 end
 
-vim.api.nvim_create_autocmd('PackChanged', {
-  desc = 'Handle nvim-treesitter updates',
-  group = vim.api.nvim_create_augroup('nvim-treesitter-pack-changed-update-handler', { clear = true }),
-  callback = function(event)
-    if event.data.kind == 'update' then
-      local ok = pcall(vim.cmd, 'TSUpdate')
-      if ok then
-        vim.notify('TSUpdate completed successfully!', vim.log.levels.INFO)
-      else
-        vim.notify('TSUpdate command not available yet, skipping', vim.log.levels.WARN)
-      end
-    end
-  end,
-})
+-- NOTE:
+--      uncomment if you want to enable folding
+--      with tree-sitter
 
 -- vim.api.nvim_create_autocmd('FileType', {
 --   callback = function()
