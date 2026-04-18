@@ -1,9 +1,16 @@
 local M = {}
 set = vim.o
 
+-- vim.filetype.add({
+--   extension = {
+--     c3i = "c3",
+--   }
+-- })
+--
 vim.diagnostic.config({ virtual_text = true })
 vim.filetype.add({
   pattern = {
+    [ "*.c3i" ] = "c3",
     [".*/kitty/*.conf"] = "bash",
     [".*/tofi/config"] = "config",
     ["*.h"] = "c",
