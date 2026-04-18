@@ -7,6 +7,7 @@ require('conform').setup({
     c = { 'clang-format' },
     sh = { 'shfmt' },
     markdown = { "prettier" },
+    -- css = { "prettier" },
   },
   formatters = {},
   default_format_opts = {

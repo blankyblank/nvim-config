@@ -5,6 +5,7 @@ return {
     '--clang-tidy',
     '--enable-config',
     '--header-insertion=never',
+    '--header-insertion-decorators',
     '--completion-style=detailed',
     '--function-arg-placeholders=1',
     '--fallback-style=llvm',
@@ -20,7 +21,7 @@ return {
     'meson_options.txt',
     '.git',
   },
-  filetypes = { 'c' },
+  filetypes = { 'c', 'cpp' },
   init_options = {
     usePlaceholders = true,
     completeUnimported = true,
@@ -34,7 +35,7 @@ return {
       completionItem = {
         commitCharactersSupport = true,
         deprecatedSupport = true,
-        documentationFormat = { 'markdown', 'plaintext' },
+        documentationFormat = { 'doxygen', 'markdown', 'plaintext' },
         insertReplaceSupport = true,
         insertTextModeSupport = {
           valueSet = { 1 },
@@ -61,4 +62,3 @@ return {
 }
 
 -- '--header-insertion=iwyu',
--- '--header-insertion-decorators',
