@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
 vim.api.nvim_create_user_command("LaunchTermDebug", function()
   vim.ui.input({ prompt = 'Binary for debug session:' }, function(input)
     if input then
-      vim.cmd("Termdebug" .. input)
+      vim.cmd("Termdebug " .. input)
     end
   end)
 end, { nargs = 0, desc = 'start termdebug with a binary'})

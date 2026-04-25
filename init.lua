@@ -14,7 +14,6 @@ vim.opt.termguicolors = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-
 -- require("extra")
 require("config.hooks")
 require("plugins")
