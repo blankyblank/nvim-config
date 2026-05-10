@@ -11,7 +11,7 @@ require("lualine").setup({
     section_separators = { left = "", right = "" },
     ignore_focus = { "undotree" },
     always_divide_middle = true,
-    always_show_tabline = false,
+    always_show_tabline = true,
     globalstatus = true,
   },
 

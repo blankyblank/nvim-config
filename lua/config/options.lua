@@ -1,12 +1,6 @@
-local M = {}
 set = vim.o
+lset = vim.opt_local
 
--- vim.filetype.add({
---   extension = {
---     c3i = "c3",
---   }
--- })
---
 vim.diagnostic.config({ virtual_text = true })
 vim.filetype.add({
   pattern = {
@@ -19,7 +13,6 @@ vim.filetype.add({
   },
 })
 
---set.statusline = '%f %(%h%w%M%r%) %= %y' -- NOTE: if not using lualine
 set.breakindent = true
 set.cmdheight = 0
 set.completeopt = "menuone,noselect"
@@ -38,10 +31,12 @@ set.showcmd = false
 set.showmode = false
 set.signcolumn = "yes:1"
 -- set.signcolumn = "no" -- NOTE: for no sign column
+-- set.statusline = '%f %(%h%w%M%r%) %= %y' -- NOTE: if not using lualine
 set.smartcase = true
 set.smartindent = true
 set.spelllang = "en_us"
 set.tabstop = 2
+vim.opt.tags = { './tags', 'tags' }
 set.termguicolors = true
 set.timeoutlen = 600
 set.undofile = true
@@ -50,12 +45,6 @@ set.winborder = "single"
 set.wrap = false
 
 vim.cmd([[
-  pa! nohlsearch
-  pa! termdebug
+pa! termdebug
 ]])
---  NOTE: add one of these into vim.cmd to load them on startup
---[[
-  pa! nvim.undotree
-]]
 vim.g.termdebugger = "gdb"
-return M

@@ -1,4 +1,5 @@
 vim.pack.add({
+  Gh('nvim-mini/mini.ai'),
   Gh('nvim-mini/mini.align'),
   Gh('nvim-mini/mini.bracketed'),
   Gh('nvim-mini/mini.diff'),
@@ -11,8 +12,8 @@ vim.pack.add({
   Gh('nvim-mini/mini.clue'),
 })
 
-require('mini.align').setup({})
-require('mini.bracketed').setup({})
+require('mini.ai').setup()
+require('mini.align').setup()
 require('mini.diff').setup()
 require('mini.git').setup()
 require('mini.icons').setup()
@@ -21,6 +22,19 @@ require('mini.jump').setup({ silent = true  })
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup({ respect_selection_type = true, silent = true })
+require('mini.bracketed').setup({
+  buffer     = { suffix = 'b', options = {} },
+  comment    = { suffix = 'c', options = {} },
+  conflict   = { suffix = 'x', options = {} },
+  diagnostic = { suffix = 'd', options = {} },
+  file       = { suffix = 'f', options = {} },
+  indent     = { suffix = 'i', options = {} },
+  jump       = { suffix = 'j', options = {} },
+  location   = { suffix = 'l', options = {} },
+  oldfile    = { suffix = 'o', options = {} },
+  quickfix   = { suffix = 'q', options = {} },
+  treesitter = { suffix = '', options = {} },
+})
 
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -55,6 +69,7 @@ miniclue.setup({
     { mode = 'n', keys = '<Leader>b',  desc = '+Buffer' },
     { mode = 'n', keys = '<Leader>c',  desc = '+Code' },
     { mode = 'n', keys = '<Leader>cs', desc = '+Search' },
+    { mode = 'n', keys = '<Leader>cH', desc = '+Haskell' },
     { mode = 'n', keys = '<Leader>d',  desc = '+Debug' },
     { mode = 'n', keys = '<Leader>f',  desc = '+File' },
     { mode = 'n', keys = '<Leader>g',  desc = '+Git' },
@@ -66,6 +81,11 @@ miniclue.setup({
     { mode = 'n', keys = '<Leader>t',  desc = '+Toggle' },
   },
 })
+
+-- snacks relies on mini
+-- WARN: I need to remember to put this back in 
+-- init.lua if I remove mini, or the dep on mini
+require('plugins.snacks')
 
 -- require('mini.comment').setup({ options = { ignore_blank_line = true } })
 -- require('mini.files').setup({ options = { use_as_default_explorer = false } })

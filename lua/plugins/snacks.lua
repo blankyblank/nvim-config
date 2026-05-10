@@ -14,6 +14,7 @@ require('snacks').setup({
   quickfile = { enabled = true },
   scope = { enabled = true, blocks = { enabled = true } },
   scratch = { minimal = true },
+  terminal = { enabled = true },
   indent = {
     enabled = true,
     only_scope = true,
@@ -46,24 +47,6 @@ require('snacks').setup({
   --   refresh = 50, -- refresh at most every 50ms
   -- },
 
-  terminal = {
-    enabled = true,
-    keys = {
-      q = 'hide',
-      gf = function(self)
-        local f = vim.fn.findfile(vim.fn.expand('<cfile>'), '**')
-        if f == '' then
-          Snacks.notify.warn('No file under cursor')
-        else
-          self:hide()
-          vim.schedule(function()
-            vim.cmd('e ' .. f)
-          end)
-        end
-      end,
-    },
-  },
-
   zen = {
     toggles = {
       words = false,
@@ -79,6 +62,16 @@ require('snacks').setup({
     --       width = 0, -- full width
     --     },
     -- },
+  },
+  styles = {
+    zen = {
+      minimal = true,
+      width = 130,
+      backdrop = { transparent = false, blend = 99 },
+      keys = { q = false },
+      wo = { winhighlight = "NormalFloat:Normal" },
+      w = { snacks_main = true },
+     }
   },
 
   -- NOTE: set to true and uncomment below to use the dashboard
@@ -114,43 +107,18 @@ require('snacks').setup({
       { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1, indent = 2 },
     }, ]]
   },
-
-  styles = {
-    zen = {
-      enter = true,
-      fixbuf = false,
-      minimal = false,
-      width = 130,
-      height = 0,
-      backdrop = { transparent = false, blend = 99 },
-      keys = { q = false },
-      zindex = 40,
-      wo = {
-        winhighlight = "NormalFloat:Normal",
-      },
-      w = {
-        snacks_main = true,
-      },
-     }
-  }
+  keys = {
+    { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+    { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+  },
 })
 
 vim.api.nvim_create_autocmd('User', {
   callback = function()
-    _G.dd = function(...)
-      Snacks.debug.inspect(...)
-    end
-    _G.bt = function()
-      Snacks.debug.backtrace()
-    end
     if vim.fn.has('nvim-0.11') == 1 then -- Override print to use snacks for `:=` command
       vim._print = function(_, ...)
-        dd(...)
       end
-    else
-      vim.print = _G.dd
     end
-
     Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>ts')
     Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>tw')
     Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>tL')
@@ -165,6 +133,7 @@ vim.api.nvim_create_autocmd('User', {
     Snacks.toggle.zen():map('<leader>tz')
     Snacks.toggle.zoom():map('<leader>tZ')
     Snacks.toggle.option('conceallevel',
+
       { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map('<leader>tc')
   end,
 })

@@ -37,6 +37,20 @@ vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
   end,
 })
 
+-- the only way I could find to let you scroll past the last line.
+-- its still not perfect. it looks like all the plugins for this right
+-- now are broken.
+--[[ vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
+  callback = function()
+    if vim.fn.mode() == "i" and vim.fn.pumvisible() == 1 then
+      return -- Don't interfere with the popup menu
+    end
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("normal! zz")
+    vim.api.nvim_win_set_cursor(0, cursor)
+  end,
+}) ]]
+
 --  NOTE:
 --       User Commands
 

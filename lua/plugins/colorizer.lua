@@ -14,8 +14,8 @@ require("colorizer").setup({
       },
       hex = {
         default = false,
-        rgb = true,      -- #RGB
-        rgba = true,     -- #RGBA
+        rgb = false,      -- #RGB
+        rgba = false,     -- #RGBA
         rrggbb = true,   -- #RRGGBB
         rrggbbaa = true, -- #RRGGBBAA
         aarrggbb = true, -- 0xAARRGGBB
