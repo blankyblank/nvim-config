@@ -1,13 +1,8 @@
 vim.pack.add({
-  {
-    src = Gh('nvim-treesitter/nvim-treesitter'),
-    version = 'main',
-  },
-  {
-    src = Gh('nvim-treesitter/nvim-treesitter-textobjects'),
-    version = 'main',
+    Gh('nvim-treesitter/nvim-treesitter'),
+    Gh('nvim-treesitter/nvim-treesitter-textobjects'),
     --https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  },
+    Gh('nvim-treesitter/nvim-treesitter-context'),
 })
 
 
@@ -17,7 +12,11 @@ require('nvim-treesitter').setup({
     enable = true,
     additional_vim_regex_highlighting = { 'ruby' },
   },
-  indent = { enable = true, disable = { 'ruby' } },
+  indent = { enable = true, disable = { 'ruby', 'c' } },
+})
+
+require('treesitter-context').setup({
+  max_lines = 2,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
@@ -86,8 +85,8 @@ local mv = require('nvim-treesitter-textobjects.move')
 for _, map in ipairs({
   { { 'n', 'x', 'o' }, ']m', mv.goto_next_start,     '@function.outer' },
   { { 'n', 'x', 'o' }, '[m', mv.goto_previous_start, '@function.outer' },
-  { { 'n', 'x', 'o' }, ']]', mv.goto_next_start,     '@class.outer' },
-  { { 'n', 'x', 'o' }, '[[', mv.goto_previous_start, '@class.outer' },
+  -- { { 'n', 'x', 'o' }, ']]', mv.goto_next_start,     '@class.outer' },
+  -- { { 'n', 'x', 'o' }, '[[', mv.goto_previous_start, '@class.outer' },
   { { 'n', 'x', 'o' }, ']M', mv.goto_next_end,       '@function.outer' },
   { { 'n', 'x', 'o' }, '[M', mv.goto_previous_end,   '@function.outer' },
   { { 'n', 'x', 'o' }, ']o', mv.goto_next_start,     { '@loop.inner', '@loop.outer' } },
