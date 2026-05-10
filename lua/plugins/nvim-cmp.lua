@@ -19,7 +19,7 @@ vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true
 vim.keymap.set({ "i", "s" }, "<C-H>", function() ls.jump(-1) end, { silent = true })
 
 local cmp = require('cmp')
-require("luasnip").setup() -- for luasnip
+ls.setup() -- for luasnip
 
 -- local gen_loader = require('mini.snippets').gen_loader     --for mini.snippets
 -- require('mini.snippets').setup({
@@ -64,26 +64,16 @@ cmp.setup({
 
   sorting = {
     comparators = {
-      cmp.config.compare.offset,
       cmp.config.compare.exact,
-      cmp.config.compare.recently_used,
       require('clangd_extensions.cmp_scores'),
+      cmp.config.compare.recently_used,
+      cmp.config.compare.offset,
       cmp.config.compare.kind,
       cmp.config.compare.sort_text,
       cmp.config.compare.length,
       cmp.config.compare.order,
     },
   },
-
-  -- to use icons in completion popup
-  -- formatting = {
-  --   format = function(_, vim_item)
-  --     local icon, hl = MiniIcons.get("lsp", vim_item.kind)
-  --     vim_item.kind = icon .. " " .. vim_item.kind
-  --     vim_item.kind_hl_group = hl
-  --     return vim_item
-  --   end,
-  -- },
 
   experimental = {
     ghost_text = vim.g.ai_cmp and { hl_group = 'CmpGhostText' } or true,
@@ -97,17 +87,18 @@ cmp.setup({
     { name = 'path' },
     { name = 'buffer' },
   }),
+
+  -- to use icons in completion popup
+  formatting = {
+    format = function(entry, vim_item)
+      local icon, hl = MiniIcons.get("lsp", vim_item.kind)
+      vim_item.kind = icon .. " " .. vim_item.kind
+      vim_item.kind_hl_group = hl
+      return vim_item
+    end,
+  },
 })
 
--- -- try fixing mini.snippets leaving behind tabstops when you undo.
--- vim.keymap.set("n", "u", function()
---   vim.cmd("undo")
---   -- Force cleanup of mini.snippets session (if active)
---   if MiniSnippets.session.get() ~= nil then
---     MiniSnippets.session.stop()
---   end
--- end, { desc = "Undo and clean up snippets" })
---
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = { { name = 'buffer' } },
@@ -122,3 +113,33 @@ cmp.setup.cmdline(':', {
   matching = { disallow_symbol_nonprefix_matching = false },
 })
 
+cmp.setup.filetype("c", {
+  sources = cmp.config.sources({
+    {
+      name = "luasnip",
+      option = { use_show_condition = false }, -- Disable luasnip's internal filter
+      -- XXX: Debug labels
+      -- entry_filter = function(entry, ctx)
+      --   print("Source:", entry.source.name, "Label:", entry:get_completion_item().label)
+      --   return true
+      -- end,
+      entry_filter = function(entry, ctx)
+      local blocked = {  "case", "return" }
+        local trigger = entry:get_completion_item().label
+        return not vim.tbl_contains(blocked, trigger)
+    end,
+    },
+    {
+      name = "nvim_lsp",
+      -- XXX: Debug labels
+      -- entry_filter = function(entry, ctx)
+      --   print("Source:", entry.source.name, "Label:", entry:get_completion_item().label)
+      --   return true
+      -- end,
+      entry_filter = function(entry, ctx)
+        local blocked = { "if", "for", " include", " define", " ifndef", " ifdef", " switch", " printf", " fprintf", " free", " typedef" }
+        return not vim.tbl_contains(blocked, entry:get_completion_item().label)
+      end
+    },
+  })
+})
