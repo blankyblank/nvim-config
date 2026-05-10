@@ -1,0 +1,12 @@
+vim.pack.add({ Gh("mrcjkb/haskell-tools.nvim") })
+
+local ht = require('haskell-tools')
+local bufnr = vim.api.nvim_get_current_buf()
+vim.keymap.set('n', '<space>cl', vim.lsp.codelens.run, { noremap = true, silent = true, buffer = bufnr, desc = "codelens"})
+vim.keymap.set('n', '<space>cHs', ht.hoogle.hoogle_signature, { noremap = true, silent = true, buffer = bufnr, desc = "hoogle signature"})
+vim.keymap.set('n', '<space>cHe', ht.lsp.buf_eval_all, { noremap = true, silent = true, buffer = bufnr, desc = "eval buffer"})
+vim.keymap.set('n', '<space>cHrr', ht.repl.toggle, { noremap = true, silent = true, buffer = bufnr, desc = "toggle repl for package"})
+vim.keymap.set('n', '<space>cHrf', function()
+  ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+end, { noremap = true, silent = true, buffer = bufnr, desc = "toggle repl for buffer"})
+vim.keymap.set('n', '<space>cHrq', ht.repl.quit, { noremap = true, silent = true, buffer = bufnr, desc = "quit repl"})
