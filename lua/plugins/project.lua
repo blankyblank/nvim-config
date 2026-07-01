@@ -1,10 +1,12 @@
 vim.pack.add({ Gh('DrKJeff16/project.nvim') })
 -- https://github.com/DrKJeff16/project.nvim
 
+require('plugins.fzf')
+
 require('project').setup({
   enable_autochdir = true,
-  snacks = {
+  fzf_lua = {
     enabled = true,
-    enable_autochdir = true,
+    show = 'names',
   }
 })

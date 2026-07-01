@@ -18,7 +18,7 @@ require("colorizer").setup({
         rgba = false,     -- #RGBA
         rrggbb = true,   -- #RRGGBB
         rrggbbaa = true, -- #RRGGBBAA
-        aarrggbb = true, -- 0xAARRGGBB
+        aarrggbb = false, -- 0xAARRGGBB
       },
       rgb = { enable = true, },
       hsl = { enable = true, },

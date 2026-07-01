@@ -51,7 +51,7 @@ require("onedarkpro").setup({
     ["@Keyword.import.c"] = { fg = "#61AFEF" },
     ["@label.c"] = { fg = "#61AFEF" },
   },
-  options = { cursorline = true, terminal_colors = false },
+  options = { cursorline = true, terminal_colors = true },
   filetypes = { all = false, },
   plugins = { treesitter = true, },
 })

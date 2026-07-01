@@ -1,6 +1,9 @@
 vim.pack.add({
   Gh('neovim/nvim-lspconfig'),
+  Gh("mason-org/mason.nvim"),
 })
+
+require("mason").setup()
 
 -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
 -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })

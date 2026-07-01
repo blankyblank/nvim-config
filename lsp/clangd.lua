@@ -4,7 +4,7 @@ return {
     '--background-index',
     '--clang-tidy',
     '--enable-config',
-    '--header-insertion=never',
+    '--header-insertion=iwyu',
     '--header-insertion-decorators',
     '--completion-style=detailed',
     '--function-arg-placeholders=1',
@@ -61,4 +61,3 @@ return {
   settings = {},
 }
 
--- '--header-insertion=iwyu',

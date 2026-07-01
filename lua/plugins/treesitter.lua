@@ -1,10 +1,15 @@
 vim.pack.add({
     Gh('nvim-treesitter/nvim-treesitter'),
-    Gh('nvim-treesitter/nvim-treesitter-textobjects'),
     --https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     Gh('nvim-treesitter/nvim-treesitter-context'),
+
+    { 
+      src = Gh('nvim-treesitter/nvim-treesitter-textobjects'),
+      version = 'main',
+     }
 })
 
+vim.g.no_plugin_maps = true
 
 require('nvim-treesitter').setup({
   install_dir = vim.fn.stdpath('data') .. '/site',
@@ -18,6 +23,7 @@ require('nvim-treesitter').setup({
 require('treesitter-context').setup({
   max_lines = 2,
 })
+vim.cmd("hi TreesitterContextBottom gui=underline guisp='#4F5666'")
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { '*' },
@@ -85,8 +91,6 @@ local mv = require('nvim-treesitter-textobjects.move')
 for _, map in ipairs({
   { { 'n', 'x', 'o' }, ']m', mv.goto_next_start,     '@function.outer' },
   { { 'n', 'x', 'o' }, '[m', mv.goto_previous_start, '@function.outer' },
-  -- { { 'n', 'x', 'o' }, ']]', mv.goto_next_start,     '@class.outer' },
-  -- { { 'n', 'x', 'o' }, '[[', mv.goto_previous_start, '@class.outer' },
   { { 'n', 'x', 'o' }, ']M', mv.goto_next_end,       '@function.outer' },
   { { 'n', 'x', 'o' }, '[M', mv.goto_previous_end,   '@function.outer' },
   { { 'n', 'x', 'o' }, ']o', mv.goto_next_start,     { '@loop.inner', '@loop.outer' } },
@@ -103,7 +107,6 @@ end
 -- NOTE:
 --      uncomment if you want to enable folding
 --      with tree-sitter
-
 -- vim.api.nvim_create_autocmd('FileType', {
 --   callback = function()
 --     -- Enable syntax highlighting

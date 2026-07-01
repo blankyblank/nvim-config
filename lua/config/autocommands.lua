@@ -2,6 +2,26 @@ local M = {}
 
 --  NOTE:
 --       AutoCommands
+
+vim.o.updatetime = 1000 -- Trigger CursorHold after 1s
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.config({
+      virtual_lines = false,
+      virtual_text = { current_line = true, },
+      -- float = { scope = 'line', },
+    })
+  end
+})
+vim.api.nvim_create_autocmd("CursorMoved", {
+  callback = function()
+    vim.diagnostic.config({
+      virtual_lines = false,
+      virtual_text = false
+    })
+  end
+})
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   callback = function()
@@ -37,6 +57,17 @@ vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
   end,
 })
 
+-- header guard AutoCommand
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = {"*.h", "*.hpp"},
+  callback = function()
+    local filename = vim.fn.expand("%:t")
+    local guard = filename:gsub("%W", "_"):upper()
+    local content = string.format("#ifndef %s\n#define %s\n\n#endif /* %s */", guard, guard, guard)
+    -- Split the string into lines and pass as a table
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, vim.split(content, "\n"))
+  end
+})
 -- the only way I could find to let you scroll past the last line.
 -- its still not perfect. it looks like all the plugins for this right
 -- now are broken.
@@ -53,6 +84,12 @@ vim.api.nvim_create_autocmd("FileType", { --disable visual noice in help files
 
 --  NOTE:
 --       User Commands
+
+vim.api.nvim_buf_create_user_command(0, "Clean", function()
+  vim.cmd("make clean")
+  vim.cmd("make -j12")
+  vim.cmd("!sudo make install")
+end, { nargs = 0, desc = 'run make clean, then make' })
 
 vim.api.nvim_create_user_command("LaunchTermDebug", function()
   vim.ui.input({ prompt = 'Binary for debug session:' }, function(input)

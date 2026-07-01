@@ -1,13 +1,3 @@
--- to use my version of onedark
--- vim.cmd([[
--- colorscheme onehalf-dark
--- highlight Normal guibg=none
--- highlight NonText guibg=none
--- highlight Normal ctermbg=none
--- highlight NonText ctermbg=none
--- ]])
--- local highlight = { "CursorLine", "Whitespace" }
-
 autocmd = vim.api.nvim_create_autocmd
 vim.have_nerd_font = true
 vim.opt.termguicolors = true
@@ -49,13 +39,10 @@ vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
 
-
--- require("extra")
 require("config.hooks")
 require("plugins")
 require("config")
--- vim.cmd([[set runtimepath+=/usr/local/share/vim/vimfiles]])
-vim.cmd([[let &packpath = &runtimepath]])
+-- vim.cmd([[let &packpath = &runtimepath]])
 
 if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0.0

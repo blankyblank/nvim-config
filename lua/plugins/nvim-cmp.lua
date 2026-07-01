@@ -80,10 +80,10 @@ cmp.setup({
   },
 
   sources = cmp.config.sources({
+    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' }, -- for luasnip
     -- { name = 'mini.snippets', }, -- for mini.snippet
-    { name = 'nvim_lsp_signature_help' },
     { name = 'path' },
     { name = 'buffer' },
   }),
@@ -124,7 +124,7 @@ cmp.setup.filetype("c", {
       --   return true
       -- end,
       entry_filter = function(entry, ctx)
-      local blocked = {  "case", "return" }
+        local blocked = { "case", "return", "while", "do" }
         local trigger = entry:get_completion_item().label
         return not vim.tbl_contains(blocked, trigger)
     end,

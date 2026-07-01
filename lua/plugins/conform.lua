@@ -4,12 +4,16 @@ vim.pack.add({ Gh('stevearc/conform.nvim') })
 require('conform').setup({
   formatters_by_ft = {
     lua = { lsp_format = 'first', },
+    -- c = { 'uncrustify' },
+    -- h = { 'uncrustify' },
     c = { 'clang-format' },
     sh = { 'shfmt' },
     markdown = { "prettier" },
     -- css = { "prettier" },
   },
+
   formatters = {},
+
   default_format_opts = {
     lsp_format = 'fallback',
   },

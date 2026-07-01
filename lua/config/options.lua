@@ -1,7 +1,9 @@
 set = vim.o
 lset = vim.opt_local
 
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+  -- virtual_text = true
+})
 vim.filetype.add({
   pattern = {
     [ "*.c3i" ] = "c3",
