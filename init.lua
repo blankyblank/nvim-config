@@ -54,8 +54,23 @@ vim.g.loaded_zipPlugin = 1
 require("config.hooks")
 require("plugins")
 require("config")
-vim.cmd([[set runtimepath+=/usr/local/share/vim/vimfiles]])
+-- vim.cmd([[set runtimepath+=/usr/local/share/vim/vimfiles]])
 vim.cmd([[let &packpath = &runtimepath]])
+
+if vim.g.neovide then
+  vim.g.neovide_scroll_animation_length = 0.0
+  vim.g.neovide_scroll_animation_length = 0.0
+  vim.g.neovide_progress_bar_enabled = true
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_short_animation_length = 0
+  vim.g.neovide_cursor_trail_size = 1.0
+  local function copy() vim.cmd([[normal! "+y]]) end
+  local function paste() vim.api.nvim_paste(vim.fn.getreg("+"), true, -1) end
+  vim.keymap.set("v", "<S-C-c>", copy, { silent = true, desc = "Copy" })
+  vim.keymap.set({ "n", "i", "v", "c", "t" }, "<S-C-v>", paste, { silent = true, desc = "Paste" })
+  vim.opt.termguicolors = true
+end
 
 vim.filetype.add({
   extension = {
